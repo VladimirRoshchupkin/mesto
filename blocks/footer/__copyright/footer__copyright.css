@@ -1,4 +1,4 @@
-.footer_copyright {
+.footer__copyright {
     padding: 67px 0 60px;
     margin: 0;
     font-style: normal;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 800px) {
-    .footer_copyright {
+    .footer__copyright {
         font-size: 14px;
         line-height: 17px;
     }
