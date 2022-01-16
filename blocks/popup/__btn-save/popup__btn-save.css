@@ -1,0 +1,33 @@
+.popup__btn-save {
+    margin: 0 36px 37px;/*Из за того, что в макете линии идут как 0px при указанных размерах в 1px, а так же
+    line-height больше чем указанные размеры текстового блока, то расстояние от кнопки до низа блока не совпадает с 
+    макетом, если не прав, то поправьте как оно может совпасть не корректируя другие размеры*/
+    padding: 0;
+    width: 358px;
+    height: 50px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    transition: opacity 3s;
+    box-sizing: border-box;
+}
+
+.popup__btn-save:hover {
+    opacity: 0.8;
+}
+
+/*Для размера ниже 640 скоректированны отступы на рассогласование размера блока в макете и указаниях line-height
+Опять сделано так, чтобы или там или там заставить исправить?
+PS По заданию на больших разрешениях нестыковка в размерах может быть 30px на малых в 10px*/
+@media screen and (max-width: 640px) {
+    .popup__btn-save {
+        margin: 0 22px 25px;
+        width: 238px;
+        height: 46px;
+    }
+}

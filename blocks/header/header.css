@@ -1,0 +1,4 @@
+.header {
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    padding:max(min(calc(45px - (1280px - 100vw)/50.0),45px),28px) max(min(calc(0px + (1280px - 100vw)/100.0),8px),0px) max(min(calc(41px - (1280px - 100vw)/45.0),41px),31px);
+}
