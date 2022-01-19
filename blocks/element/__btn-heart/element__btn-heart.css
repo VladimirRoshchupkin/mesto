@@ -1,8 +1,7 @@
 .element__btn-heart {
-    position: absolute;
-    bottom: 30px;
-    right: 20px;
-    width: 22px;
+    margin: 30px 20px 30px 0px;
+    padding: 0;
+    min-width: 22px;
     height: 19px;
     background-image: url(../../../images/heart.svg);
     background-color: transparent;
@@ -14,4 +13,5 @@
 
 .element__btn-heart:hover {
     opacity: .5;
+    cursor: pointer;
 }

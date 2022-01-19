@@ -36,4 +36,5 @@
 
 
 @import url(../blocks/visible/visible.css);
+@import url(../blocks/flex-row-betw/flex-row-betw.css); /*ОБщвое конечн онапрашивается миксы вынести в отдельную папку Mix*/
 
