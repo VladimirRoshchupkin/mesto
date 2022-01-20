@@ -20,21 +20,17 @@
 @import url(../blocks/element/__btn-heart/element__btn-heart.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__cont/element__cont.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/btn-close/popup__btn-close.css);
+@import url(../blocks/popup/__btn-close/popup__btn-close.css);
 @import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__input-name/popup__input-name.css);
-@import url(../blocks/popup/__about/popup__about.css);
+@import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__btn-save/popup__btn-save.css);
-@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/_invisible/popup_invisible.css);
 
-
-
-@import url(../blocks/visible/visible.css);
-@import url(../blocks/flex-row-betw/flex-row-betw.css); /*ОБщвое конечн онапрашивается миксы вынести в отдельную папку Mix*/
 

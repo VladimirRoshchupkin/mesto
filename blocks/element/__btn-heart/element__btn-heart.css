@@ -8,7 +8,7 @@
     background-repeat: no-repeat;
     background-position: center;
     border: none;
-    transition: opacity 3s;
+    transition: opacity 1s;
 }
 
 .element__btn-heart:hover {

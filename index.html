@@ -16,57 +16,57 @@
         <img class="profile__avatar" src="images/avatar.jpg" alt="Фотография пользователя">
         <div class="profile__info">
           <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__btn-edit"></button>
+          <button type="button" class="profile__btn-edit" aria-label="Редактировать"></button>
           <p class="profile__user-description">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__btn-add"></button>
+        <button type="button" class="profile__btn-add" aria-label="Добавить"></button>
       </section>
       <section class="elements">
         <article class="element">
           <img class="element__img" src="./images/kirill-pershin-1088404-unsplash-1.jpg" alt="фотография Карачаевска">
-          <div class="flex-row-betw">
+          <div class="element__cont">
             <h2 class="element__title">Карачаевск</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
         <article class="element">
           <img class="element__img"  src="./images/kirill-pershin-1404681-unsplash-1.jpg" alt="фотография горы Эльбрус">
-          <div class="flex-row-betw">
+          <div class="element__cont">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
         <article class="element">
           <img class="element__img" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="фотографя Домбай">
-          <div class="flex-row-betw">
+          <div class="element__cont">
             <h2 class="element__title">Домбай</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
         <article class="element">
           <img class="element__img" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="фотография горы Эльбрус">
-          <div class="flex-row-betw">
+          <div class="element__cont">
            <h2 class="element__title">Гора Эльбрус</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
         <article class="element">
           <img class="element__img" src="./images/kirill-pershin-1556355-unsplash-1.jpg" alt="фотографя Домбай">
-          <div class="flex-row-betw">
+          <div class="element__cont">
             <h2 class="element__title">Домбай</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
         <article class="element">
           <img class="element__img" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фотография Карачаевска">
-          <div class="flex-row-betw">
+          <div class="element__cont">
             <h2 class="element__title">Карачаевск</h2>
-            <button type="button" class="element__btn-heart"></button>
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
           </div>
         </article>
 
@@ -76,13 +76,13 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup visible">
+    <div class="popup popup_invisible">
       <div class="popup__container">
-        <button type="button" class="popup__btn-close"></button>
+        <button type="button" class="popup__btn-close" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup_f">
-          <input name="popup_in" class="popup__input-name" type="text" placeholder="Имя" required>
-          <input name=popup_a class="popup__about" type="text" placeholder="Призвание">
+        <form class="popup__form" name="popup_form">
+          <input name="popup_name" class="popup__input" type="text" placeholder="Имя" required>
+          <input name="popup_about" class="popup__input" type="text" placeholder="Призвание">
           <button type="submit" class="popup__btn-save">Сохранить</button>
         </form>
       </div>

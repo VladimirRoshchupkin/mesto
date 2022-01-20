@@ -1,6 +1,5 @@
-.popup__about {
+.popup__input {
     outline: none;
-    margin: 0 36px 48px;
     width: 358px;
     padding: 0 0 9px 0;
     font-style: normal;
@@ -9,13 +8,13 @@
     line-height: 17px;
     border: 0px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.2);
-    /*height: 14px;Высота текста 17???*/
+    margin: 0 36px 30px;
+    /*height: 14px;Высота текста 17???12px*/
 }
 
-
 @media screen and (max-width: 640px) {
-    .popup__about {
-        margin: 0 22px 42px;
+    .popup__input {
+        margin: 0 22px 30px;
         width: 238px;
     }
 }

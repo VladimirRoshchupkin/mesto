@@ -1,4 +1,4 @@
-.flex-row-betw {
+.element__cont {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
