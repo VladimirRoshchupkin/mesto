@@ -22,6 +22,7 @@ for (let i=0; i<popupInputs.length; i++) {
         popupAbout=popupInputs[i]
     }
 }*/
+//и все таки по Id, т.к. по имени прилетает массив, опять лишние действия будут чтобы вытащить из массива.
 const popupInputName = document.getElementById('popup_name');
 const popupAbout = document.getElementById('popup_about');
 console.log(popupInputName)
