@@ -1,4 +1,23 @@
 .footer {
+    margin: 0 200px;
     /*flex-shrink: 0;
     Не получилось прилепить футер*/
+}
+/*3 перехода для плавности и нормального отображения текста*/
+@media screen and (max-width: 1024px) {
+    .footer {
+        margin: 0 150px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .footer {
+        margin: 0 70px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .footer {
+        margin: 0 19px;
+    }
 }

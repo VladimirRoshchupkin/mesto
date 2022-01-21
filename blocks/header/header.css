@@ -1,12 +1,24 @@
 .header {
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-    padding:max(min(calc(45px - (1280px - 100vw)/50.0),45px),28px) max(min(calc(0px + (1280px - 100vw)/100.0),8px),0px) max(min(calc(41px - (1280px - 100vw)/45.0),41px),31px);
-    /*Да, в команде согласен тяжело читать, но здесь и в других местах было сделано умышленно, если бы не линия на весь экран то это позволяет избежать лишнего медиа запроса, хоть медиа-запрос и проще сделать*/
+    margin: 0 200px;
+    padding: 45px 0 41px;
+}
+/*3 перехода для плавности и нормального отображения текста*/
+@media screen and (max-width: 1024px) {
+    .header {
+        margin: 0 150px;
+    }
 }
 
-/*Костыли для "На мобильном экране header (линия) должен занимать всю ширину страницы" - очень не хочется править все элементы*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 800px) {
     .header {
-        margin: 0 -19px;
+        margin: 0 70px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .header {
+        margin: 0;
+        padding: 28px 0 32px;
     }
 }

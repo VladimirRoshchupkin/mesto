@@ -1,0 +1,23 @@
+.content {
+    margin: 0 200px;
+}
+/*чтобы столбцы в гриде были 3 2 1 без прыжков их количества при изменении размеров - например 3 2 3 2 1 2 1 с calc всё было куда симпатичнее при переходе
+и чтобы имя текст отображалось........*/
+@media screen and (max-width: 1024px) {
+    .content {
+        margin: 0 150px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        margin: 0 70px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .content {
+        margin: 0 19px;
+    }
+}
+

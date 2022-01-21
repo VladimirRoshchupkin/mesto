@@ -8,10 +8,12 @@ const popupForm = document.querySelector('.popup__form');
 //element
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserDescription = document.querySelector('.profile__user-description');
-//это конечно сложнее чем вписать два левых модификатора и к ним привязаться, но зато не создано никаких пустышек
-//и это может даже быстрее чем ломать голову над именами двух пустых модификаторов, создавать им папки, привязывать, потом в 10-ти местах переименовывать если не угадал с именем.
-//getElementsByName() еще заманчиво, но поддержка ниже и даже не везде про него пишут по умолчанию в методах
-const popupInputs = document.querySelectorAll('.popup__input');
+//"Это не очень надежная история. Порядок полей может поменяться, и тогда функция не будет работать как должна."
+//Не согласен, порядок полей значения не имеет как и их количество, т.к. устроен перебор всех class='.popup__input' а в них уже поиск по атрибуту "name"
+//Присвоение идет через [i] по перебору, жесткого указания номера полей не использовал.
+//Но исправлю
+//"искать можно по селектору атрибута name" - тогда напрямую по нему, чтобы не писать лишнего. Показалось как будто ID не по феншую яндекса, не буду его умышленно вводить, а по имени ранее не использовал как писал из за неподдежки или не полной поддержки в edge/ie.
+/*const popupInputs = document.querySelectorAll('.popup__input');
 for (let i=0; i<popupInputs.length; i++) {
     if (popupInputs[i].name==="popup_name") {
         popupInputName=popupInputs[i]
@@ -19,7 +21,10 @@ for (let i=0; i<popupInputs.length; i++) {
     if (popupInputs[i].name==="popup_about") {
         popupAbout=popupInputs[i]
     }
-}
+}*/
+const popupInputName = document.getElementById('popup_name');
+const popupAbout = document.getElementById('popup_about');
+console.log(popupInputName)
 
 function swithPopupVisible () {
     popup.classList.toggle('popup_invisible')

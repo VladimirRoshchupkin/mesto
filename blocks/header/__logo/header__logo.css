@@ -4,12 +4,12 @@
     background-size: cover;
     width: 142px;
     height: 33px;
-    /*margin:max(min(calc(45px - (1280px - 100vw)/50.0),45px),28px) max(min(calc(0px + (1280px - 100vw)/100.0),8px),0px) max(min(calc(41px - (1280px - 100vw)/45.0),41px),31px);*/
 }
 
-/*Костыли для "На мобильном экране header (линия) должен занимать всю ширину страницы" - очень не хочется править все элементы*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 640px) {
     .header__logo {
-        margin-left: 19px;
+        margin-left: 27px;
+        width: 104px;
+        height: 24px;
     }
 }
