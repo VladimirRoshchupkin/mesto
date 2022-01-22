@@ -1,47 +1,116 @@
-//btn
-const popupBtnClose = document.querySelector('.popup__btn-close');
-const profileBtnEdit = document.querySelector('.profile__btn-edit');
-const popupBtnSave = document.querySelector('.popup__btn-save');
 //window
-const popup = document.querySelector('.popup');
-const popupForm = document.querySelector('.popup__form');
+const popupProfile = document.querySelector('.popup_profile_js');
+const popupElement = document.querySelector('.popup_element_js');
+const popupPhoto = document.querySelector('.popup_photo_js');
+const popupProfileForm = popupProfile.querySelector('.popup__form');
+const popupElementForm = popupElement.querySelector('.popup__form');
+const templElement = document.querySelector('.template_element').content;
+const elements = document.querySelector('.elements')
+//console.log(elements)
+//btn
+const profileBtnEdit = document.querySelector('.profile__btn-edit');
+const profileBtnAdd = document.querySelector('.profile__btn-add');
+
+const profileBtnClose = popupProfile.querySelector('.popup__btn-close');
+const profileBtnSave = popupProfile.querySelector('.popup__btn-save');
+
+const elementBtnClose = popupElement.querySelector('.popup__btn-close');
+const elementBtnSave = popupElement.querySelector('.popup__btn-save');
+
+////const PhotoBtnClose = popupPhoto.querySelector('.popup__btn-close');
+
 //element
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserDescription = document.querySelector('.profile__user-description');
-//"Это не очень надежная история. Порядок полей может поменяться, и тогда функция не будет работать как должна."
-//Не согласен, порядок полей значения не имеет как и их количество, т.к. устроен перебор всех class='.popup__input' а в них уже поиск по атрибуту "name"
-//Присвоение идет через [i] по перебору, жесткого указания номера полей не использовал.
-//Но исправлю
-//"искать можно по селектору атрибута name" - тогда напрямую по нему, чтобы не писать лишнего. Показалось как будто ID не по феншую яндекса, не буду его умышленно вводить, а по имени ранее не использовал как писал из за неподдежки или не полной поддержки в edge/ie.
-/*const popupInputs = document.querySelectorAll('.popup__input');
-for (let i=0; i<popupInputs.length; i++) {
-    if (popupInputs[i].name==="popup_name") {
-        popupInputName=popupInputs[i]
-    }
-    if (popupInputs[i].name==="popup_about") {
-        popupAbout=popupInputs[i]
-    }
-}*/
-//и все таки по Id, т.к. по имени прилетает массив, опять лишние действия будут чтобы вытащить из массива.
-const popupInputName = document.getElementById('popup_name');
-const popupAbout = document.getElementById('popup_about');
-console.log(popupInputName)
 
-function swithPopupVisible () {
-    popup.classList.toggle('popup_invisible')
+const popupProfileInputName = popupProfile.querySelector('.popup__input_name_js');
+const popupProfileAbout = popupProfile.querySelector('.popup__input_about_js');
+const popupElementInputName = popupElement.querySelector('.popup__input_name_js');
+const popupElementLink = popupElement.querySelector('.popup__input_link_js');
+
+////const popupImg = popupPhoto.querySelector('.popup__img');
+////const popupImgName = popupPhoto.querySelector('.popup__figcap');
+
+addElement(initialCards)
+
+function addElement(objData) {
+    //console.log(objData)
+    objData.reverse().forEach(item => {//
+        const element = templElement.cloneNode(true);
+        const elementImg = element.querySelector('.element__img');
+        const elementTitle = element.querySelector('.element__title');
+        const elementHeart = element.querySelector('.element__btn-heart');
+        const elementDelete = element.querySelector('.element__btn-delete');
+        elementImg.src=item.link;
+        elementImg.alt='фотография ' + item.name;
+        elementImg.addEventListener('click',() => openPopupPhoto(item))
+        elementTitle.textContent=item.name;
+        elementHeart.addEventListener('click',() => elementHeart.classList.toggle('element__btn-heart_active'));
+        //console.log(elementDelete)
+        //console.log(element)
+        //elementDelete.addEventListener('click',function () {element.remove} );
+        elementDelete.addEventListener('click',() => elementDelete.parentElement.remove());
+        elements.prepend(element);
+
+
+    });
+}
+
+function openPopupPhoto (item) {
+    console.log(3)
+    
+    console.log(item)
+    console.log(item.link)
+    popupImg.src=item.link;
+    popupImg.alt='фотография ' + item.name;
+    popupImgName.textContent=item.name
+    popupPhoto.classList.remove('popup_invisible')
+}
+
+
+//function swithPopupVisible () {
+//    popupProfile.classList.toggle('popup_invisible')
+//}
+function switchVisible (obj) {
+    obj.classList.toggle('popup_invisible')
 }
 function openPopupEdit () {
-    popupInputName.value=profileUserName.textContent
-    popupAbout.value=profileUserDescription.textContent
-    swithPopupVisible ()
+    popupProfileInputName.value=profileUserName.textContent
+    popupProfileAbout.value=profileUserDescription.textContent
+    switchVisible(popupProfile)
 }
-function formSubmitHandler (event) {
+/*function formSubmitHandler (event) {
     event.preventDefault();
-    profileUserName.textContent=popupInputName.value
-    profileUserDescription.textContent=popupAbout.value
-    swithPopupVisible ()
+    profileUserName.textContent=popupProfileInputName.value
+    profileUserDescription.textContent=popupProfileAbout.value
+    switchVisible(popupProfile)
+}*/
+function profileFormSubmitHandler (event) {
+    event.preventDefault();
+    profileUserName.textContent=popupProfileInputName.value
+    profileUserDescription.textContent=popupProfileAbout.value
+    switchVisible(popupProfile)
+}
+function openPopupAdd () {
+    popupElementForm.reset()
+    switchVisible(popupElement)
+}
+function elementFormSubmitHandler (event) {
+    event.preventDefault();
+    
+    addElement([{name: popupElementInputName.value, link: popupElementLink.value}]);
+    switchVisible(popupElement);
 }
 
-popupBtnClose.addEventListener('click',swithPopupVisible)
+//profileBtnClose.addEventListener('click',swithPopupVisible)
+//popupProfileForm.addEventListener('submit',formSubmitHandler)
+profileBtnClose.addEventListener('click',() => switchVisible(popupProfile))
 profileBtnEdit.addEventListener('click',openPopupEdit)
-popupForm.addEventListener('submit',formSubmitHandler)
+popupProfileForm.addEventListener('submit',profileFormSubmitHandler)
+
+profileBtnAdd.addEventListener('click',openPopupAdd)
+elementBtnClose.addEventListener('click',() => switchVisible(popupElement))
+popupElementForm.addEventListener('submit',elementFormSubmitHandler)
+
+PhotoBtnClose.addEventListener('click',() => switchVisible(popupPhoto))
+
