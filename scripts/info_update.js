@@ -6,7 +6,6 @@ const popupProfileForm = popupProfile.querySelector('.popup__form');
 const popupElementForm = popupElement.querySelector('.popup__form');
 const templElement = document.querySelector('.template_element').content;
 const elements = document.querySelector('.elements')
-//console.log(elements)
 //btn
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
 const profileBtnAdd = document.querySelector('.profile__btn-add');
@@ -17,7 +16,7 @@ const profileBtnSave = popupProfile.querySelector('.popup__btn-save');
 const elementBtnClose = popupElement.querySelector('.popup__btn-close');
 const elementBtnSave = popupElement.querySelector('.popup__btn-save');
 
-////const PhotoBtnClose = popupPhoto.querySelector('.popup__btn-close');
+const PhotoBtnClose = popupPhoto.querySelector('.popup__btn-close');
 
 //element
 const profileUserName = document.querySelector('.profile__user-name');
@@ -28,13 +27,12 @@ const popupProfileAbout = popupProfile.querySelector('.popup__input_about_js');
 const popupElementInputName = popupElement.querySelector('.popup__input_name_js');
 const popupElementLink = popupElement.querySelector('.popup__input_link_js');
 
-////const popupImg = popupPhoto.querySelector('.popup__img');
-////const popupImgName = popupPhoto.querySelector('.popup__figcap');
+const popupImg = popupPhoto.querySelector('.popup__img');
+const popupImgName = popupPhoto.querySelector('.popup__figcap');
 
 addElement(initialCards)
 
 function addElement(objData) {
-    //console.log(objData)
     objData.reverse().forEach(item => {//
         const element = templElement.cloneNode(true);
         const elementImg = element.querySelector('.element__img');
@@ -46,21 +44,12 @@ function addElement(objData) {
         elementImg.addEventListener('click',() => openPopupPhoto(item))
         elementTitle.textContent=item.name;
         elementHeart.addEventListener('click',() => elementHeart.classList.toggle('element__btn-heart_active'));
-        //console.log(elementDelete)
-        //console.log(element)
-        //elementDelete.addEventListener('click',function () {element.remove} );
         elementDelete.addEventListener('click',() => elementDelete.parentElement.remove());
         elements.prepend(element);
-
-
     });
 }
 
 function openPopupPhoto (item) {
-    console.log(3)
-    
-    console.log(item)
-    console.log(item.link)
     popupImg.src=item.link;
     popupImg.alt='фотография ' + item.name;
     popupImgName.textContent=item.name
@@ -68,9 +57,7 @@ function openPopupPhoto (item) {
 }
 
 
-//function swithPopupVisible () {
-//    popupProfile.classList.toggle('popup_invisible')
-//}
+
 function switchVisible (obj) {
     obj.classList.toggle('popup_invisible')
 }
@@ -79,12 +66,7 @@ function openPopupEdit () {
     popupProfileAbout.value=profileUserDescription.textContent
     switchVisible(popupProfile)
 }
-/*function formSubmitHandler (event) {
-    event.preventDefault();
-    profileUserName.textContent=popupProfileInputName.value
-    profileUserDescription.textContent=popupProfileAbout.value
-    switchVisible(popupProfile)
-}*/
+
 function profileFormSubmitHandler (event) {
     event.preventDefault();
     profileUserName.textContent=popupProfileInputName.value
@@ -102,8 +84,7 @@ function elementFormSubmitHandler (event) {
     switchVisible(popupElement);
 }
 
-//profileBtnClose.addEventListener('click',swithPopupVisible)
-//popupProfileForm.addEventListener('submit',formSubmitHandler)
+
 profileBtnClose.addEventListener('click',() => switchVisible(popupProfile))
 profileBtnEdit.addEventListener('click',openPopupEdit)
 popupProfileForm.addEventListener('submit',profileFormSubmitHandler)
