@@ -30,15 +30,18 @@ const popupElementLink = popupElement.querySelector('.popup__input_link_js');
 const popupImg = popupPhoto.querySelector('.popup__img');
 const popupImgName = popupPhoto.querySelector('.popup__figcap');
 
-addElements(initialCards)
-//Надеюсь в будущем пойму зачем разбивали функцию.
-//по сути там и так использовалась строчная функция т.е. без объявления. С объявлением и разбивкой конечно универсальнее, не поспоришь, 
-//тут наверно проект маленький, не оценить. 
+addElements(initialCards,elements)
 
-function addElements(objData) {
+//надеюсь ничего не сломал пока переделывал. 20 раз переделал 20 раз проверил, вроде всё работает
+function addElements(objData,domTarget) {
     objData.reverse().forEach(item => {
-        createElement(item)
+        addElement(item,domTarget)
     });
+}
+
+function addElement (item,domTarget) {
+    const element = createElement (item);
+    addToDom(domTarget,element);  
 }
 
 function createElement (item) {//
@@ -53,20 +56,22 @@ function createElement (item) {//
     elementTitle.textContent=item.name;
     elementHeart.addEventListener('click',() => elementHeart.classList.toggle('element__btn-heart_active'));
     elementDelete.addEventListener('click',() => elementDelete.parentElement.remove());
-    domPrepend (elements,element)
+    return element
 }
-//И эта из одного действия........
-function domPrepend (dom,newDom) {
-    dom.prepend(newDom);
+
+function addToDom (dom,newDom,type = 'prepend') {
+    switch (type) {
+        case 'prepend'://остальное допишется\добавится когда будет необходимо
+            dom.prepend(newDom);
+            break;
+    }
 }
 
 function openPopupPhoto (item) {
     popupImg.src=item.link;
     popupImg.alt='фотография ' + item.name;
-    popupImgName.textContent=item.name
-    //Ранее забыл, что мы при открытии блокируем экран, думал что можно подряд перещелкивать фото без закрытия, поэтому не использовал toggle
-    //ну и попробовал привязаться к родителю через уже имеющийся в функции объект и класс его родителя,  
-    switchVisible(popupImg.closest('.popup_photo_js'))
+    popupImgName.textContent=item.name 
+    switchVisible(popupPhoto)
 }
 
 function switchVisible (obj) {
@@ -79,28 +84,28 @@ function openPopupEdit () {
     switchVisible(popupProfile)
 }
 
-function submitHandlerProfileForm (event) {
+function handlerSubmitProfileForm (event) {
     event.preventDefault();
     profileUserName.textContent=popupProfileInputName.value
     profileUserDescription.textContent=popupProfileAbout.value
     switchVisible(popupProfile)
 }
 
-function submitHandlerElementForm (event) {
+function handlerSubmitElementForm (event) {
     event.preventDefault();
     
-    addElements([{name: popupElementInputName.value, link: popupElementLink.value}]);
+    addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
     switchVisible(popupElement);
     popupElementForm.reset()
 }
 
 profileBtnClose.addEventListener('click',() => switchVisible(popupProfile))
 profileBtnEdit.addEventListener('click',openPopupEdit)
-popupProfileForm.addEventListener('submit',submitHandlerProfileForm)
+popupProfileForm.addEventListener('submit',handlerSubmitProfileForm)
 
 profileBtnAdd.addEventListener('click',() => switchVisible(popupElement))
 elementBtnClose.addEventListener('click',() => switchVisible(popupElement))
-popupElementForm.addEventListener('submit',submitHandlerElementForm)
+popupElementForm.addEventListener('submit',handlerSubmitElementForm)
 
 PhotoBtnClose.addEventListener('click',() => switchVisible(popupPhoto))
 
