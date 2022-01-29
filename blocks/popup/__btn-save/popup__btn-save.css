@@ -1,5 +1,5 @@
 .popup__btn-save {
-    margin: 18px 36px 37px;
+    margin: 28px 36px 37px;/*up 18*/
     padding: 0;
     border: none;
     width: 358px;
@@ -19,6 +19,17 @@
 .popup__btn-save:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+.popup__btn-save:disabled {
+    border: 1px solid #000000;
+    background-color: #E5E5E5;
+    color: #000000;
+    opacity: 0.2;
+}
+
+.popup__btn-save:disabled:hover {
+    cursor: default;
 }
 
 /*скоректированны отступы на рассогласование размера блока в макете и указаниях line-height
