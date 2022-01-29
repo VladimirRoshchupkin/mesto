@@ -32,12 +32,9 @@
     cursor: default;
 }
 
-/*скоректированны отступы на рассогласование размера блока в макете и указаниях line-height
-Но на 1280 Sum(элементов)=219 а в браузере 220.6, не пойму откуда +1.6px при том что border margin padding подсчитаны
-PS По заданию на больших разрешениях нестыковка в размерах может быть 30px на малых в 10px не знаю будет ли это спасением)*/
 @media screen and (max-width: 640px) {
     .popup__btn-save {
-        margin: 15px 22px 25px;
+        margin: 25px 22px 25px;
         width: 238px;
         height: 46px;
         font-size: 14px;

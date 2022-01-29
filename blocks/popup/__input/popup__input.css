@@ -9,13 +9,11 @@
     border: 0px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.2);
     margin: 10px 36px 5px;
-    /*margin: 0 36px 30px;
-    height: 14px;Высота текста 17???12px*/
 }
 
 @media screen and (max-width: 640px) {
     .popup__input {
-        margin: 0 22px 30px;
+        margin: 10px 22px 5px;
         width: 238px;
     }
 }

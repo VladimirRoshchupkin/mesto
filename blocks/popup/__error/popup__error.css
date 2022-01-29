@@ -10,3 +10,9 @@
     visibility: hidden;/* */
     transition: visibility 1.0s, opacity 0.5s linear;
 }
+
+@media screen and (max-width: 640px) {
+    .popup__error {
+        padding: 0 22px 0;
+    }
+}
