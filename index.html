@@ -37,9 +37,9 @@
         <form class="popup__form" name="popup_form" novalidate>
           <!--Контейнер на input/span? а зачем контейнер пустышка? не будем использовать лишние обертки как и говорится в задании. только если для связки input\span, но и в тренажере и вебинаре обходились без этого-->
           <input id="popup__input_name" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Имя" required minlength="2" maxlength="40">
-          <span class="popup__error popup__input_name_error_js">Error1</span>
+          <span class="popup__error popup__input_name-error_js"></span>
           <input id="popup__input_about" name="popup_about" class="popup__input popup__input_about_js" type="text" placeholder="Призвание" required  minlength="2" maxlength="200">
-          <span class="popup__error popup__input_about_error_js">Error2</span>
+          <span class="popup__error popup__input_about-error_js"></span>
           <button type="submit" class="popup__btn-save">Сохранить</button>
         </form>
       </div>
@@ -51,9 +51,9 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="popup_form" novalidate>
           <input id="popup__photo_name" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="popup__error popup__photo_name_error_js">Error3</span>
+          <span class="popup__error popup__photo_name-error_js"></span>
           <input id="popup__input_link" name="popup_link" class="popup__input popup__input_link_js" type="url" placeholder="Ссылка на картинку" required>
-          <span class="popup__error popup__input_link_error_js">Error4</span>
+          <span class="popup__error popup__input_link-error_js"></span>
           <button type="submit" class="popup__btn-save">Создать</button>
         </form>
       </div>
