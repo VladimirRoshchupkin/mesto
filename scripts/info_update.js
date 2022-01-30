@@ -47,13 +47,15 @@ function closePopupsByOverlay (event) {
 }
 
 function switchVisible (obj) {
-    obj.classList.toggle('popup_visible')
-     if (obj.classList.contains('popup_visible')) {
-        obj.addEventListener('mousedown', closePopupsByOverlay);
-        document.addEventListener('keydown', closePopupsByEsc);
-    } else {
-        obj.removeEventListener('mousedown', closePopupsByOverlay);
-        document.removeEventListener('keydown', closePopupsByEsc);
+    if (obj !== null) { //если не проверить, то пока идет плавное закрытие окна можно понажимать на крестик и словить ошибку
+        obj.classList.toggle('popup_visible')
+        if (obj.classList.contains('popup_visible')) {
+           obj.addEventListener('mousedown', closePopupsByOverlay);
+           document.addEventListener('keydown', closePopupsByEsc);
+       } else {
+           obj.removeEventListener('mousedown', closePopupsByOverlay);
+           document.removeEventListener('keydown', closePopupsByEsc);
+       }
     }
 }
 
