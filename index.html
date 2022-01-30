@@ -36,10 +36,10 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popup_form" novalidate>
           <!--Контейнер на input/span? а зачем контейнер пустышка? не будем использовать лишние обертки как и говорится в задании. только если для связки input\span, но и в тренажере и вебинаре обходились без этого-->
-          <input id="popup__input_name" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Имя" required minlength="2" maxlength="40">
-          <span class="popup__error popup__input_name_errorJs"></span>
-          <input id="popup__input_about" name="popup_about" class="popup__input popup__input_about_js" type="text" placeholder="Призвание" required  minlength="2" maxlength="200">
-          <span class="popup__error popup__input_about_errorJs"></span>
+          <input id="name" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Имя" required minlength="2" maxlength="40">
+          <span class="popup__error popup__error_name_js"></span>
+          <input id="about" name="popup_about" class="popup__input popup__input_about_js" type="text" placeholder="Призвание" required  minlength="2" maxlength="200">
+          <span class="popup__error popup__error_about_js"></span>
           <button type="submit" class="popup__btn-save">Сохранить</button>
         </form>
       </div>
@@ -50,10 +50,10 @@
         <button type="button" class="popup__btn-close" aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="popup_form" novalidate>
-          <input id="popup__photo-name" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="popup__error popup__photo-name_errorJs"></span>
-          <input id="popup__input-link" name="popup_link" class="popup__input popup__input_link_js" type="url" placeholder="Ссылка на картинку" required>
-          <span class="popup__error popup__input-link_errorJs"></span>
+          <input id="photoName" name="popup_name" class="popup__input popup__input_name_js" type="text" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="popup__error popup__error_photoName_js"></span>
+          <input id="link" name="popup_link" class="popup__input popup__input_link_js" type="url" placeholder="Ссылка на картинку" required>
+          <span class="popup__error popup__error_link_js"></span>
           <button type="submit" class="popup__btn-save">Создать</button>
         </form>
       </div>

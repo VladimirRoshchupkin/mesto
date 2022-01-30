@@ -3,13 +3,13 @@ const ValidationConstants = {
     inputSelector: '.popup__input',//
     //submitButtonSelector: '.popup__btn-save',//не использую, легко ищется по типу submit
     //inactiveButtonClass: 'popup__btn-save_disabled',//не использую, заменено на псведокласс
-    inputErrorClass: 'popup__input_error', //без _type т.к. модификатора _type_normal или иного нет, можно вообще удалить и перейти на псевдокласс.
+    inputErrorClass: 'popup__input_error', //popup__input_error   без _type т.к. модификатора _type_normal или иного нет, можно вообще удалить и перейти на псевдокласс.
     errorClass: 'popup__error_visible'//
 }
 
 function validateInput(form, input, errorVisible, inputErrorClass) {
     const valid = input.validity.valid;
-    const error_msg = form.querySelector(`.${input.id}_errorJs`);
+    const error_msg = form.querySelector(`.popup__error_${input.id}_js`);
     if (valid) {
         error_msg.classList.remove(errorVisible);
         error_msg.textContent="";
