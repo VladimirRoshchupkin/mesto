@@ -9,7 +9,7 @@ const ValidationConstants = {
 
 function validateInput(form, input, errorVisible, inputErrorClass) {
     const valid = input.validity.valid;
-    const error_msg = form.querySelector(`.${input.id}-errorJs`);
+    const error_msg = form.querySelector(`.${input.id}_errorJs`);
     if (valid) {
         error_msg.classList.remove(errorVisible);
         error_msg.textContent="";
