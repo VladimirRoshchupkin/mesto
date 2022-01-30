@@ -71,19 +71,22 @@ function enableValidation (vc) {
 
 enableValidation(ValidationConstants); 
 
-function openPopupEdit (vc) {//необходима валидация при открытии формы, т.к. есть вероятность что старая информация не пройдет  валидацию, которая допустим изменилась, а на загрузку данных из скрипта слушатель input не срабатывает, хотя написано что должен сработать при любом изменении поля.
+//Ниже две функции содержащие в себе валидацию
+
+function openPopupEdit (vc) {//необходима валидация при открытии формы, т.к. есть вероятность что старая информация не пройдет  валидацию, которая допустим изменилась, а на загрузку данных скриптом слушатель input не срабатывает, хотя написано что должен сработать при любом изменении поля.
     popupProfileInputName.value=profileUserName.textContent;
     popupProfileAbout.value=profileUserDescription.textContent;
     validateForm(popupProfile, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
     switchVisible(popupProfile);
 }
 
-//решить где резмещать данную форму\валидацию ..добавить к эвенту еще и валид константы
-function handlerSubmitElementForm (event) {
+//после сброса формы необходима валидация. т.к. функция открытия пустая и сброс делается при закрытии, то и валидация сделана при закрытии.
+function handlerSubmitElementForm (event, vc) {
     event.preventDefault();
     addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
     switchVisible(popupElement);
     popupElementForm.reset()
+    validateForm(popupElementForm, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
 }
 
 
