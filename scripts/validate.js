@@ -9,7 +9,7 @@ const ValidationConstants = {
 
 function validateInput(form, input, errorVisible, inputErrorClass) {
     const valid = input.validity.valid;
-    const error_msg = form.querySelector(`.popup__error_${input.id}_js`);
+    const error_msg = form.querySelector(`.popup__error_js_${input.id}`);
     if (valid) {
         error_msg.classList.remove(errorVisible);
         error_msg.textContent="";
@@ -63,31 +63,15 @@ function enableValidation (vc) {
     pforms.forEach(form => {
         //можно добавлять слушатели при открытии окна, и удалять при закрытии. Будет возможно прирост в быстродействи или не будет???
         //но ведь форма может быть не всплывающая, а постоянно видимая, и тогда для неё придется писать отдельную ветку. так что идем по пути универсальности.
-        AddEvLiToForm(form, vc.inputSelector,vc.errorClass, vc.inputErrorClass);
+        AddEvLiToForm(form, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
         //Валидация на случай, если при загрузке страницы какие-то формы уже отрисованны. а так же для первой загрузки скрытого окна с значениями по умолчанию. далее проверка будет по изменению.
-        validateForm(form, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
+        //validateForm(form, vc.inputSelector, vc.errorClass, vc.inputErrorClass); удаляем, раз не валидируем до тех пор пока пользователь не начнет вводить данные.
     });
   }
 
 enableValidation(ValidationConstants); 
 
-//Ниже две функции содержащие в себе валидацию
 
-function openPopupEdit (vc) {//необходима валидация при открытии формы, т.к. есть вероятность что старая информация не пройдет  валидацию, которая допустим изменилась, а на загрузку данных скриптом слушатель input не срабатывает, хотя написано что должен сработать при любом изменении поля.
-    popupProfileInputName.value=profileUserName.textContent;
-    popupProfileAbout.value=profileUserDescription.textContent;
-    validateForm(popupProfile, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
-    switchVisible(popupProfile);
-}
-
-//после сброса формы необходима валидация. т.к. функция открытия пустая и сброс делается при закрытии, то и валидация сделана при закрытии.
-function handlerSubmitElementForm (event, vc) {
-    event.preventDefault();
-    addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
-    switchVisible(popupElement);
-    popupElementForm.reset()
-    validateForm(popupElementForm, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
-}
 
 
 
