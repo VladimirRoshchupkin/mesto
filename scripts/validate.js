@@ -2,12 +2,12 @@ const validationConstants = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__btn-save',
-    inactiveButtonClass: 'popup__btn-save_disabled',//не использую, заменено на псведокласс
-    inputErrorClass: 'popup__input_type_error', //popup__input_error   без _type т.к. модификатора _type_normal или иного нет, можно вообще удалить и перейти на псевдокласс.
-    errorClass: 'popup__error_visible'//
+    inactiveButtonClass: 'popup__btn-save_disabled',
+    inputErrorClass: 'popup__input_type_error', 
+    errorClass: 'popup__error_visible'
 }
 
-function validateInput(form, input, vc) { //errorVisible, inputErrorClass
+function validateInput(form, input, vc) { 
     const valid = input.validity.valid;
     const error_msg = form.querySelector(`.popup__error_js_${input.id}`);
     if (valid) {
@@ -44,29 +44,27 @@ function getInputsFromForm (form, inputSelector) {
     return Array.from(form.querySelectorAll(inputSelector));
 }
 
-function validateForm(form, vc) { //inputSelector, errorVisible, inputErrorClass
+function validateForm(form, vc) { 
     const inputs=getInputsFromForm(form, vc.inputSelector);
     inputs.forEach(input => {
-        validateInput(form, input, vc) //errorVisible, inputErrorClass
+        validateInput(form, input, vc) 
     });
     formValid = inputs.every(validateInputs);
     const submitBtn = form.querySelector(vc.submitButtonSelector);
     toggleButtonState(submitBtn, formValid, vc);
 }
 
-function AddEvLiToForm (form, vc) {//inputSelector, errorVisible, inputErrorClass
+function AddEvLiToForm (form, vc) {
     const inputs=getInputsFromForm(form, vc.inputSelector)
     inputs.forEach(input => {
-        input.addEventListener('input',() => {validateForm(form, vc)}) //inputSelector, errorVisible, inputErrorClass
+        input.addEventListener('input',() => {validateForm(form, vc)}) 
     });
 }
 
 function enableValidation (vc) {
     const pforms = Array.from(document.querySelectorAll(vc.formSelector))
     pforms.forEach(form => {
-        AddEvLiToForm(form, vc);  //vc.inputSelector, vc.errorClass, vc.inputErrorClass
-        //Валидация на случай, если при загрузке страницы какие-то формы уже отрисованны. а так же для первой загрузки скрытого окна с значениями по умолчанию. далее проверка будет по изменению.
-        //validateForm(form, vc.inputSelector, vc.errorClass, vc.inputErrorClass); удаляем, раз не валидируем до тех пор пока пользователь не начнет вводить данные.
+        AddEvLiToForm(form, vc);  
     });
   }
 

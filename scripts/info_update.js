@@ -14,8 +14,8 @@ const profileBtnClose = popupProfile.querySelector('.popup__btn-close');
 const elementBtnClose = popupElement.querySelector('.popup__btn-close');
 const photoBtnClose = popupPhoto.querySelector('.popup__btn-close');
 
-const profileBtnSave = popupProfile.querySelector('.popup__btn-save');
-const elementBtnSave = popupElement.querySelector('.popup__btn-save');
+const profileBtnSave = popupProfile.querySelector('.popup__btn-save');//уже используется
+const elementBtnSave = popupElement.querySelector('.popup__btn-save');//уже используется
 //element
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserDescription = document.querySelector('.profile__user-description');
@@ -86,12 +86,8 @@ function createElement (item) {//
     return element;
 }
 
-function addToDom (dom,newDom) {//,type = 'prepend' удалю/закоментирую, но не считаю что оператор case здесь лишний, это поможет в будущем нарастить конструкцию на выбор из 5-ти вариантов. Вы сами указываете что необходимо удалить у входного массива реверс и если хочется, то добавить append. выходит не зря оператор то прописан, если добавится третий вариант то тернальный оператор не подойдет. а всего возможных аргументов 5.
-    //switch (type) {
-        //case 'prepend'://остальное допишется\добавится когда будет необходимо
+function addToDom (dom,newDom) {
     dom.prepend(newDom);
-            //break;
-    //}
 }
 
 function addElement (item, domTarget) {
@@ -100,7 +96,7 @@ function addElement (item, domTarget) {
 }
 
 function addElements(objData, domTarget) {
-    objData.forEach(item => {//.reverse() удален. т.к. использование append было указано по желанию, то нет, такого желания нет до тех пор пока это не будет указано в задании или чек-листе, использовать его не буду. Считаю что реверс был универсальнее для данного задания, тем более без case во вставке.
+    objData.forEach(item => {
         addElement(item, domTarget);
     });
 }
@@ -111,18 +107,15 @@ addElements(initialCards, elements);
 function openPopupEdit () {
     popupProfileInputName.value=profileUserName.textContent;
     popupProfileAbout.value=profileUserDescription.textContent;
-    //validateForm(popupProfile, vc.inputSelector, vc.errorClass, vc.inputErrorClass); 
-    disableSubmitButton (profileBtnSave, validationConstants)
+    disableSubmitButton (profileBtnSave, validationConstants);
     openPopup(popupProfile);
 }
 
-//после сброса формы необходима валидация. т.к. функция открытия пустая и сброс делается при закрытии, то и валидация сделана при закрытии.
 function handlerSubmitElementForm (event) {
     event.preventDefault();
     addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
     closePopup(popupElement);
-    popupElementForm.reset()
-    //validateForm(popupElementForm, vc.inputSelector, vc.errorClass, vc.inputErrorClass);
+    popupElementForm.reset();
 }
 
 profileBtnClose.addEventListener('click', () => closePopup(popupProfile)) 
