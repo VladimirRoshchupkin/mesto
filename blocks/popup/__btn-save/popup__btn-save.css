@@ -21,17 +21,6 @@
     cursor: pointer;
 }
 
-.popup__btn-save:disabled {
-    border: 1px solid #000000;
-    background-color: #E5E5E5;
-    color: #000000;
-    opacity: 0.2;
-}
-
-.popup__btn-save:disabled:hover {
-    cursor: default;
-}
-
 @media screen and (max-width: 640px) {
     .popup__btn-save {
         margin: 25px 22px 25px;

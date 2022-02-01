@@ -14,6 +14,8 @@ const profileBtnClose = popupProfile.querySelector('.popup__btn-close');
 const elementBtnClose = popupElement.querySelector('.popup__btn-close');
 const photoBtnClose = popupPhoto.querySelector('.popup__btn-close');
 
+const profileBtnSave = popupProfile.querySelector('.popup__btn-save');
+const elementBtnSave = popupElement.querySelector('.popup__btn-save');
 //element
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserDescription = document.querySelector('.profile__user-description');
@@ -110,6 +112,7 @@ function openPopupEdit () {
     popupProfileInputName.value=profileUserName.textContent;
     popupProfileAbout.value=profileUserDescription.textContent;
     //validateForm(popupProfile, vc.inputSelector, vc.errorClass, vc.inputErrorClass); 
+    disableSubmitButton (profileBtnSave, validationConstants)
     openPopup(popupProfile);
 }
 
@@ -125,7 +128,7 @@ function handlerSubmitElementForm (event) {
 profileBtnClose.addEventListener('click', () => closePopup(popupProfile)) 
 profileBtnEdit.addEventListener('click', openPopupEdit)
 popupProfileForm.addEventListener('submit', handlerSubmitProfileForm)
-profileBtnAdd.addEventListener('click', () => openPopup(popupElement))
+profileBtnAdd.addEventListener('click', () => {openPopup(popupElement); disableSubmitButton (elementBtnSave, validationConstants)})
 elementBtnClose.addEventListener('click', () => closePopup(popupElement)) 
 popupElementForm.addEventListener('submit', handlerSubmitElementForm)
 photoBtnClose.addEventListener('click', () => closePopup(popupPhoto))    
