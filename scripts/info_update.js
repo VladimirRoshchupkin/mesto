@@ -28,11 +28,12 @@ const popupElementLink = popupElement.querySelector('.popup__input_js_link');
 const popupImg = popupPhoto.querySelector('.popup__img');
 const popupImgName = popupPhoto.querySelector('.popup__figcap');
 
-let activePopup = undefined;
+//let activePopup = undefined; //если убрать, то возможно нарушается чек лист, т.к. DOM-елементы окон найдены выше: "Поиск одного и того же DOM-элемента не должен происходить дважды".
 
 function closePopupByEsc (event) {
     if (event.key === 'Escape') {
-        closePopup(activePopup);
+        closePopup(document.querySelector('.popup_visible')); //чек лист: Поиск одного и того же DOM-элемента не должен происходить дважды...
+        //closePopup(activePopup);
     }
 }
 
@@ -43,18 +44,14 @@ function closePopupsByOverlay (event) {
 }
 
 function openPopup (obj) {
-    if (obj !== null) { //не помешает, и для однотипности.
-        obj.classList.add('popup_visible');
-        document.addEventListener('keydown', closePopupByEsc);
-        activePopup = obj
-    }
+    obj.classList.add('popup_visible');
+    document.addEventListener('keydown', closePopupByEsc);
+    //activePopup = obj
 }
 
 function closePopup (obj) {
-    if (obj !== null) { //если не проверить, то пока идет плавное закрытие окна можно понажимать на крестик и словить ошибку
-        obj.classList.remove('popup_visible');
-        document.removeEventListener('keydown', closePopupByEsc);
-    }
+    obj.classList.remove('popup_visible');
+    document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function openPopupPhoto (item) {
@@ -102,7 +99,6 @@ function addElements(objData, domTarget) {
 }
 
 addElements(initialCards, elements);
-
 
 function openPopupEdit () {
     popupProfileInputName.value=profileUserName.textContent;

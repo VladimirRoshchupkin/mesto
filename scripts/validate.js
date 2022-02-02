@@ -44,11 +44,8 @@ function getInputsFromForm (form, inputSelector) {
     return Array.from(form.querySelectorAll(inputSelector));
 }
 
-function validateForm(form, vc) { 
-    const inputs=getInputsFromForm(form, vc.inputSelector);
-    inputs.forEach(input => {
-        validateInput(form, input, vc) 
-    });
+function validateForm(form, inputs, input, vc) { 
+    validateInput(form, input, vc);
     formValid = inputs.every(validateInputs);
     const submitBtn = form.querySelector(vc.submitButtonSelector);
     toggleButtonState(submitBtn, formValid, vc);
@@ -57,7 +54,7 @@ function validateForm(form, vc) {
 function AddEvLiToForm (form, vc) {
     const inputs=getInputsFromForm(form, vc.inputSelector)
     inputs.forEach(input => {
-        input.addEventListener('input',() => {validateForm(form, vc)}) 
+        input.addEventListener('input',() => {validateForm(form, inputs, input, vc)});//исправил, хоть и не было сказано в задании что нельзя валидировать сразу оба поля по изменению любого.
     });
 }
 
