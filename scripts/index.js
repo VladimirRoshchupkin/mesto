@@ -1,10 +1,12 @@
+import {FormValidator} from './FormValidator.js'
+import { openPopup,popupPhoto } from "./utils.js";
+import { Card } from './Card.js';
+import {initialCards} from './initialData.js'
 //block\form
 const popupProfile = document.querySelector('.popup_js_profile');
 const popupElement = document.querySelector('.popup_js_element');
-const popupPhoto = document.querySelector('.popup_js_photo');
 const popupProfileForm = popupProfile.querySelector('.popup__form');
 const popupElementForm = popupElement.querySelector('.popup__form');
-const templElement = document.querySelector('.template_element').content;
 const elements = document.querySelector('.elements');
 //btn
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
@@ -13,9 +15,8 @@ const profileBtnAdd = document.querySelector('.profile__btn-add');
 const profileBtnClose = popupProfile.querySelector('.popup__btn-close');
 const elementBtnClose = popupElement.querySelector('.popup__btn-close');
 const photoBtnClose = popupPhoto.querySelector('.popup__btn-close');
-
-const profileBtnSave = popupProfile.querySelector('.popup__btn-save');//уже используется
-const elementBtnSave = popupElement.querySelector('.popup__btn-save');//уже используется
+//const profileBtnSave = popupProfile.querySelector('.popup__btn-save');//уже используется
+//const elementBtnSave = popupElement.querySelector('.popup__btn-save');//уже используется
 //element
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserDescription = document.querySelector('.profile__user-description');
@@ -25,15 +26,27 @@ const popupProfileAbout = popupProfile.querySelector('.popup__input_js_about');
 const popupElementInputName = popupElement.querySelector('.popup__input_js_name');
 const popupElementLink = popupElement.querySelector('.popup__input_js_link');
 
-const popupImg = popupPhoto.querySelector('.popup__img');
-const popupImgName = popupPhoto.querySelector('.popup__figcap');
+const validationConstants = {
+    formSelector: '.popup__form', 
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__btn-save',
+    inactiveButtonClass: 'popup__btn-save_disabled',
+    inputErrorClass: 'popup__input_type_error', 
+    errorClass: 'popup__error_visible'
+}
 
-//let activePopup = undefined; //если убрать, то возможно нарушается чек лист, т.к. DOM-елементы окон найдены выше: "Поиск одного и того же DOM-элемента не должен происходить дважды".
+const editForm = document.querySelector('.form_type_edit-js');
+const addCardForm  = document.querySelector('.form_type_add-card-js');
 
-function closePopupByEsc (event) {
+const editFormFalidator = new FormValidator (validationConstants, editForm)
+const addCardFormFalidator = new FormValidator (validationConstants, addCardForm)
+
+editFormFalidator.enableValidation()
+addCardFormFalidator.enableValidation()
+
+export function closePopupByEsc (event) {
     if (event.key === 'Escape') {
-        closePopup(document.querySelector('.popup_visible')); //чек лист: Поиск одного и того же DOM-элемента не должен происходить дважды...
-        //closePopup(activePopup);
+        closePopup(document.querySelector('.popup_visible')); 
     }
 }
 
@@ -43,44 +56,16 @@ function closePopupsByOverlay (event) {
     }
 }
 
-function openPopup (obj) {
-    obj.classList.add('popup_visible');
-    document.addEventListener('keydown', closePopupByEsc);
-    //activePopup = obj
-}
-
 function closePopup (obj) {
     obj.classList.remove('popup_visible');
     document.removeEventListener('keydown', closePopupByEsc);
 }
 
-function openPopupPhoto (item) {
-    popupImg.src = item.link;
-    popupImg.alt = 'фотография ' + item.name;
-    popupImgName.textContent = item.name;
-    openPopup(popupPhoto);
-}
 
-function handlerSubmitProfileForm (event) {
-    event.preventDefault();
+function handlerSubmitProfileForm () {
     profileUserName.textContent = popupProfileInputName.value;
     profileUserDescription.textContent = popupProfileAbout.value;
     closePopup(popupProfile);
-}
-
-function createElement (item) {//
-    const element = templElement.cloneNode(true);
-    const elementImg = element.querySelector('.element__img');
-    const elementTitle = element.querySelector('.element__title');
-    const elementHeart = element.querySelector('.element__btn-heart');
-    const elementDelete = element.querySelector('.element__btn-delete');
-    elementImg.src = item.link;
-    elementImg.alt = 'фотография ' + item.name;
-    elementImg.addEventListener('click',() => openPopupPhoto(item));
-    elementTitle.textContent=item.name;
-    elementHeart.addEventListener('click',() => elementHeart.classList.toggle('element__btn-heart_active'));
-    elementDelete.addEventListener('click',() => elementDelete.parentElement.remove());
-    return element;
 }
 
 function addToDom (dom,newDom) {
@@ -88,7 +73,8 @@ function addToDom (dom,newDom) {
 }
 
 function addElement (item, domTarget) {
-    const element = createElement (item);
+    const NewCard = new Card(item, '.template_element');
+    const element = NewCard.createElement()
     addToDom(domTarget, element);  
 }
 
@@ -103,12 +89,11 @@ addElements(initialCards, elements);
 function openPopupEdit () {
     popupProfileInputName.value=profileUserName.textContent;
     popupProfileAbout.value=profileUserDescription.textContent;
-    disableSubmitButton (profileBtnSave, validationConstants);
+    addCardFormFalidator.disableSubmitButton(); 
     openPopup(popupProfile);
 }
 
-function handlerSubmitElementForm (event) {
-    event.preventDefault();
+function handlerSubmitElementForm () {
     addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
     closePopup(popupElement);
     popupElementForm.reset();
@@ -117,7 +102,7 @@ function handlerSubmitElementForm (event) {
 profileBtnClose.addEventListener('click', () => closePopup(popupProfile)) 
 profileBtnEdit.addEventListener('click', openPopupEdit)
 popupProfileForm.addEventListener('submit', handlerSubmitProfileForm)
-profileBtnAdd.addEventListener('click', () => {openPopup(popupElement); disableSubmitButton (elementBtnSave, validationConstants)})
+profileBtnAdd.addEventListener('click', () => {openPopup(popupElement); addCardFormFalidator.enableValidation()})
 elementBtnClose.addEventListener('click', () => closePopup(popupElement)) 
 popupElementForm.addEventListener('submit', handlerSubmitElementForm)
 photoBtnClose.addEventListener('click', () => closePopup(popupPhoto))    
@@ -126,3 +111,4 @@ photoBtnClose.addEventListener('click', () => closePopup(popupPhoto))
 popupProfile.addEventListener('mousedown', closePopupsByOverlay);
 popupElement.addEventListener('mousedown', closePopupsByOverlay);
 popupPhoto.addEventListener('mousedown', closePopupsByOverlay);
+
