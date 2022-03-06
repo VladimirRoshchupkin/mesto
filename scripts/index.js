@@ -35,8 +35,8 @@ const validationConstants = {
     errorClass: 'popup__error_visible'
 }
 
-const editForm = document.querySelector('.form_type_edit-js');
-const addCardForm  = document.querySelector('.form_type_add-card-js');
+const editForm = document.querySelector('.popup__form_type_edit-js');
+const addCardForm  = document.querySelector('.popup__form_type_add-card-js');
 
 const editFormFalidator = new FormValidator (validationConstants, editForm)
 const addCardFormFalidator = new FormValidator (validationConstants, addCardForm)
