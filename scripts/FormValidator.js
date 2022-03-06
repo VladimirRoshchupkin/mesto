@@ -24,11 +24,18 @@ export class FormValidator {
         return valid;
     }
 
+    //Замечание***Вызывайте этот метод из index.js для блокировки кнопки/
+    //Вызывается например здесь: function handlerSubmitElementForm () {
     disableSubmitButton () {
         this._submitBtn.setAttribute("disabled", "disabled");
         this._submitBtn.classList.add(this._inactiveButtonClass);
     }
     
+    //Замечание***Сделайте данный метод публичный и вызывайте его из index.js для разблокировки кнопки
+    //На данный момент разблокировка кнопки сама по себе не используется, блокировка используется после очистки формы
+    //при исправлении замечания о редактировании формы - если стереть имя, закрыть форму без сохранения и открыть - 
+    //то при открытии необходимо не только включить кнопку, но и проверить валидацию полей, т.к. на скриптовое изменение текста форма не реагирует
+    //как раз там _enableSubmitButton использую, но в составе полной проверки формы (и при условии что валидация пройдена), т.к. необходимо скрыть ошибки прежней валидации.
     _enableSubmitButton (button, vc) {
         this._submitBtn.removeAttribute("disabled");
         this._submitBtn.classList.remove(this._inactiveButtonClass);
@@ -52,7 +59,13 @@ export class FormValidator {
         this._toggleButtonState();
     }
 
-    _addEvLiToForm () {
+    checkFormValidity() {
+        this._inputs.forEach(input => {
+            this._validateForm(input)
+        });
+    }
+
+    _addEventListenersToForm () {
         this._inputs=this._getInputsFromForm()   
         this._inputs.forEach(input => {
             this._submitBtn = this._form.querySelector(this._submitButtonSelector);
@@ -62,9 +75,9 @@ export class FormValidator {
 
     enableValidation () {
         this._form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
+            evt.preventDefault();//не из вредности, а из лени оставлю пока здесь. ранее специально перенёс сюда, т.к. увидел это в разборе задания.
         });
-        this._addEvLiToForm();
+        this._addEventListenersToForm();
     }
 
 

@@ -1,3 +1,5 @@
+//Замечание***У изображения карточки должен присутствовать эффект при наведении (это тоже интерактивный элемент)
+//АААААААА.......Нигде не нашел в работах 4 5 6 7 ссылок или данных в макете на то, что у изображения есть эффект при наведении, и какой он. спрошу в чате ещё.
 import {FormValidator} from './FormValidator.js'
 import { openPopup,popupPhoto } from "./utils.js";
 import { Card } from './Card.js';
@@ -72,11 +74,21 @@ function addToDom (dom,newDom) {
     dom.prepend(newDom);
 }
 
-function addElement (item, domTarget) {
+function createCard (item) {
     const NewCard = new Card(item, '.template_element');
     const element = NewCard.createElement()
-    addToDom(domTarget, element);  
+    return element
 }
+
+//***замечание - Функция addElement должна возвращать готовую карточку, вставлять ее необходимо в функции-сабмите формы
+// и при рендере массива с карточками, т.к. согласно чек-листу функция может выполнять только одно действие
+//В сабмите и так происходит добавление карточки, сброс формы, закрытие окна, отключение кнопки, если именно дописать код создания карточки и её вставки - будет 5 действий
+//Как с этим жить? можно я не буду в сабмит всё подряд вставлять, а просто создание карточки отделю от её вставки?
+//Ранее наоборот вставку в дом просили вынести в отдельную функцию.
+ function addElement (item, domTarget) {
+    const element = createCard (item)
+    addToDom(domTarget, element);  
+} 
 
 function addElements(objData, domTarget) {
     objData.forEach(item => {
@@ -89,7 +101,7 @@ addElements(initialCards, elements);
 function openPopupEdit () {
     popupProfileInputName.value=profileUserName.textContent;
     popupProfileAbout.value=profileUserDescription.textContent;
-    addCardFormFalidator.disableSubmitButton(); 
+    editFormFalidator.checkFormValidity(); 
     openPopup(popupProfile);
 }
 
@@ -97,12 +109,17 @@ function handlerSubmitElementForm () {
     addElement({name: popupElementInputName.value, link: popupElementLink.value},elements);
     closePopup(popupElement);
     popupElementForm.reset();
+    addCardFormFalidator.disableSubmitButton();
 }
 
 profileBtnClose.addEventListener('click', () => closePopup(popupProfile)) 
 profileBtnEdit.addEventListener('click', openPopupEdit)
 popupProfileForm.addEventListener('submit', handlerSubmitProfileForm)
-profileBtnAdd.addEventListener('click', () => {openPopup(popupElement); addCardFormFalidator.enableValidation()})
+profileBtnAdd.addEventListener('click', () => {
+    popupElementForm.reset();//всё таки при закрытии формы надо её ресетить, иначе можно закрыть с заполненными полями, и при открытии получить неактивную кнопку сабмита 
+    openPopup(popupElement);//так же исхожу из того, что запретили проверять инпуты на валидность при открытии формы, чтобы не пугать пользователя.
+    addCardFormFalidator.disableSubmitButton();
+})
 elementBtnClose.addEventListener('click', () => closePopup(popupElement)) 
 popupElementForm.addEventListener('submit', handlerSubmitElementForm)
 photoBtnClose.addEventListener('click', () => closePopup(popupPhoto))    
