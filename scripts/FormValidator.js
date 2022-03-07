@@ -24,18 +24,11 @@ export class FormValidator {
         return valid;
     }
 
-    //Замечание***Вызывайте этот метод из index.js для блокировки кнопки/
-    //Вызывается например здесь: function handlerSubmitElementForm () {
     disableSubmitButton () {
         this._submitBtn.setAttribute("disabled", "disabled");
         this._submitBtn.classList.add(this._inactiveButtonClass);
     }
     
-    //Замечание***Сделайте данный метод публичный и вызывайте его из index.js для разблокировки кнопки
-    //На данный момент разблокировка кнопки сама по себе не используется, блокировка используется после очистки формы
-    //при исправлении замечания о редактировании формы - если стереть имя, закрыть форму без сохранения и открыть - 
-    //то при открытии необходимо не только включить кнопку, но и проверить валидацию полей, т.к. на скриптовое изменение текста форма не реагирует
-    //как раз там _enableSubmitButton использую, но в составе полной проверки формы (и при условии что валидация пройдена), т.к. необходимо скрыть ошибки прежней валидации.
     _enableSubmitButton (button, vc) {
         this._submitBtn.removeAttribute("disabled");
         this._submitBtn.classList.remove(this._inactiveButtonClass);
