@@ -3,15 +3,12 @@ export class Card {
     constructor(item, cardTemplateSelector) {
         this._item=item;
         this._cardTemplateSelector=cardTemplateSelector;
-        //this._templElement = document.querySelector(cardTemplateSelector).content;//перенес. а данный вид был показан в разборе задания.
         this._popupImg = popupPhoto.querySelector('.popup__img');
         this._popupImgName = popupPhoto.querySelector('.popup__figcap');
     }
 
     _copyTemplateElement() {
-        this._templElement = document.querySelector(this._cardTemplateSelector).content 
-        //хотя можно без создания отдельной функции/ можно вернть через return или через this, 
-        //не совсем понял как именно требуется, но если уже используется this и всё происходит внутри класса, то ограничиваюсь им.
+        return this._templElement = document.querySelector(this._cardTemplateSelector).content.querySelector('.element').cloneNode(true);
     }
 
     _openPopupPhoto () {
@@ -21,7 +18,6 @@ export class Card {
         openPopup(popupPhoto);
     }
 
-    //ок. для каждого слушателя отдельный метод.
     _setEventListenerImg() {
         this._elementImg.addEventListener('click',() => this._openPopupPhoto(this._item));
     }
@@ -41,10 +37,9 @@ export class Card {
     }
 
     createElement() {
-        this._copyTemplateElement()
-        this._element = this._templElement.querySelector('.element').cloneNode(true);
+        this._element =  this._copyTemplateElement()
         this._elementImg = this._element.querySelector('.element__img');
-        this._elementTitle = this._element.querySelector('.element__title');//за компанию для отнотипности пусть будет в this
+        this._elementTitle = this._element.querySelector('.element__title');
         this._elementHeart = this._element.querySelector('.element__btn-heart');
         this._elementDelete = this._element.querySelector('.element__btn-delete');
         this._elementImg.src = this._item.link;
