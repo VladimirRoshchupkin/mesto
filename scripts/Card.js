@@ -1,22 +1,23 @@
-import { openPopup,popupPhoto } from "./utils.js";
+/* import { openPopup,popupPhoto } from "./utils.js"; */
 export class Card {
-    constructor(item, cardTemplateSelector) {
+    constructor(item, cardTemplateSelector, handleCardClick) {
         this._item=item;
         this._cardTemplateSelector=cardTemplateSelector;
-        this._popupImg = popupPhoto.querySelector('.popup__img');
-        this._popupImgName = popupPhoto.querySelector('.popup__figcap');
+        this._popupImg = document.querySelector('.popup_js_photo').querySelector('.popup__img');//popupPhoto.querySelector('.popup__img');
+        this._popupImgName = document.querySelector('.popup_js_photo').querySelector('.popup__figcap');//popupPhoto.querySelector('.popup__figcap');
+        this._openPopupPhoto = handleCardClick;
     }
 
     _copyTemplateElement() {
         return this._templElement = document.querySelector(this._cardTemplateSelector).content.querySelector('.element').cloneNode(true);
     }
 
-    _openPopupPhoto () {
+/*     _openPopupPhoto () {
         this._popupImg.src = this._item.link;
         this._popupImg.alt = 'фотография ' + this._item.name;
         this._popupImgName.textContent = this._item.name;
         openPopup(popupPhoto);
-    }
+    } */
 
     _setEventListenerImg() {
         this._elementImg.addEventListener('click',() => this._openPopupPhoto(this._item));
