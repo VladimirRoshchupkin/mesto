@@ -4,4 +4,4 @@ export function openPopup (obj) {
     document.addEventListener('keydown', closePopupByEsc);
 } */
 
-export const  popupPhoto = document.querySelector('.popup_js_photo');
+//export const  popupPhoto = document.querySelector('.popup_js_photo');
