@@ -13,28 +13,10 @@ export class PopupWithForm extends Popup {
             this._inputValues[input.name]=input.value;
         })
         return this._inputValues;
-        console.log('PWF._gIV');
-        console.log(this._inputValues)
     }
-
-/*     setInputValues(data) {
-        console.log('SSetIV')
-        console.log(Array.from(data))
-        console.log(this._inputs)
-        this._data=data;
-        this._inputs.forEach((input) => {
-            this._data.forEach((item) => {
-                if (input.name=item.name) {
-                    input.value=item.value;
-                }
-            })
-        })
-    } */
-
 
     setEventListeners() {
         super.setEventListeners()
-        console.log(this._inputValues)
         this._form.addEventListener('submit', () => {
             this._handlerSubmitForm(this._getInputValues());
             this.close()

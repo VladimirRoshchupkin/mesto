@@ -1,4 +1,3 @@
-/* import { openPopup,popupPhoto } from "./utils.js"; */
 export class Card {
     constructor(item, cardTemplateSelector, handleCardClick) {
         this._item=item;
@@ -11,13 +10,6 @@ export class Card {
     _copyTemplateElement() {
         return this._templElement = document.querySelector(this._cardTemplateSelector).content.querySelector('.element').cloneNode(true);
     }
-
-/*     _openPopupPhoto () {
-        this._popupImg.src = this._item.link;
-        this._popupImg.alt = 'фотография ' + this._item.name;
-        this._popupImgName.textContent = this._item.name;
-        openPopup(popupPhoto);
-    } */
 
     _setEventListenerImg() {
         this._elementImg.addEventListener('click',() => this._openPopupPhoto(this._item));

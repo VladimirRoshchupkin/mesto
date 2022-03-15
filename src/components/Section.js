@@ -15,27 +15,8 @@ export class Section {
     }
 
     renderItems() {
-        console.log('Section.renderItems')
         this._items.forEach(item => {
             this._renderer(item);
         });
     }
 }
-/*
-//Section
-
-function addToDom (dom,newDom) {
-    dom.prepend(newDom);
-}
-  function addElement (item, domTarget) {
-    const element = createCard (item)
-    addToDom(domTarget, element);  
-} 
-
-function addElements(objData, domTarget) {
-    objData.forEach(item => {
-        addElement(item, domTarget);
-    });
-}
-
-addElements(initialCards, elements); */

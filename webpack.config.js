@@ -14,7 +14,7 @@ module.exports = {
     mode: 'development',
     devServer: {
         static: path.resolve(__dirname, './dist'),
-        //contentBase: path.resolve(__dirname, './dist'),
+        //contentBase: path.resolve(__dirname, './dist'), //хм хм хм в настройках есть замена статик на эту строку, но как минимум местами с ней проблемы
         compress: true,
         port: 8800,
         open: true
