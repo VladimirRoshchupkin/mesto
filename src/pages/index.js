@@ -1,3 +1,4 @@
+import './index.css'
 import {FormValidator} from '../components/FormValidator.js'
 //import { openPopup,popupPhoto } from "./utils.js";
 import { Card } from '../components/Card.js';

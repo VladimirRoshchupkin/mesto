@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 <body class="body">
   <div class="page">
@@ -13,7 +13,8 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/avatar.jpg" alt="Фотография пользователя">
+        <!-- <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография пользователя"> -->
+        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя">
         <div class="profile__info">
           <h1 class="profile__user-name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__btn-edit" aria-label="Редактировать"></button>
@@ -35,7 +36,6 @@
         <button type="button" class="popup__btn-close" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form popup__form_type_edit-js" name="popup_form" novalidate>
-          <!--Контейнер на input/span? а зачем контейнер пустышка? не будем использовать лишние обертки как и говорится в задании. только если для связки input\span, но и в тренажере и вебинаре обходились без этого-->
           <input id="name" name="popup_name" class="popup__input popup__input_js_name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
           <span class="popup__error popup__error_js_name"></span>
           <input id="about" name="popup_about" class="popup__input popup__input_js_about" type="text" placeholder="Призвание" required  minlength="2" maxlength="200">
@@ -77,6 +77,6 @@
       </article>
     </template>
   </div>
-  <script type="module" src="./pages/index.js"></script>
+  <!-- <script type="module" src="./pages/index.js"></script> -->
 </body>
 </html>

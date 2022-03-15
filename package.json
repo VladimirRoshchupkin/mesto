@@ -1,0 +1,38 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* Одностраничный сайт, на котором в дальнейшем каждый пользователь смотжет добавить себя, или не сможет, а так же сможет добавить те места где он побывал приложив фоотграфию, а так же указав своё имя и указав краткое описание\\увлечение\\профессию\r * Картинки были оптимизированны на https://tinypng.com/\r * Используемые языки CSS, HTML, JS\r * Используется адаптивная верстка, часть элементов тянется резиново, чтобы не было резких скачков между разрешениями, а так же, чтобы не добавлять медиа-скрины.\r * Используется валидация полей.\r * JS код построен на классах. в том числе используется мягкое связывание.\r * Проект подготовлен к сборке вебпаком, с выполнением оптимизации и минимизации кода.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirRoshchupkin/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladimirRoshchupkin/mesto/issues"
+  },
+  "homepage": "https://github.com/VladimirRoshchupkin/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.4",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss-loader": "^6.2.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1"
+  }
+}
