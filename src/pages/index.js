@@ -13,8 +13,8 @@ const popupProfile = document.querySelector('.popup_js_profile');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
 const profileBtnAdd = document.querySelector('.profile__btn-add');
 //element
-const profileUserName = document.querySelector('.profile__user-name');
-const profileUserDescription = document.querySelector('.profile__user-description');
+//const profileUserName = document.querySelector('.profile__user-name');
+//const profileUserDescription = document.querySelector('.profile__user-description');
 
 const popupProfileInputName = popupProfile.querySelector('.popup__input_js_name');
 const popupProfileAbout = popupProfile.querySelector('.popup__input_js_about');
@@ -28,12 +28,12 @@ const addCardFormFalidator = new FormValidator (validationConstants, addCardForm
 editFormFalidator.enableValidation()
 addCardFormFalidator.enableValidation()
 
-const PopupWithImages = new PopupWithImage('.popup_js_photo')
-PopupWithImages.setEventListeners();
+const popupWithImages = new PopupWithImage('.popup_js_photo')
+popupWithImages.setEventListeners();
 
 function createCard (item) {
-    const NewCard = new Card(item, '.template_element',() => {PopupWithImages.open(item)}); //хмммм интересный момент, если не взять в {}, то сразу идут открытия окна, при этом функция открытия не работает на слушателе.
-    const element = NewCard.createElement()
+    const newCard = new Card(item, '.template_element',() => {popupWithImages.open(item)}); //хмммм интересный момент, если не взять в {}, то сразу идут открытия окна, при этом функция открытия не работает на слушателе.
+    const element = newCard.createElement()
     return element
 }
 
@@ -61,15 +61,16 @@ function SetPopupUserInfo(Data) {
 }
 
 profileBtnEdit.addEventListener('click', ()=> {
-    SetPopupUserInfo(userProfile.getUserInfo())
-    editFormFalidator.checkFormValidity()
+    SetPopupUserInfo(userProfile.getUserInfo());
+    editFormFalidator.checkFormValidity();
     editUserPopup.open();
 })
 
 profileBtnAdd.addEventListener('click', () => {
     //popupElementForm.reset();//всё таки при закрытии формы надо её ресетить, иначе можно закрыть с заполненными полями, и при открытии получить неактивную кнопку сабмита 
     addCardPopup.open();//так же исхожу из того, что запретили проверять инпуты на валидность при открытии формы, чтобы не пугать пользователя.
-    addCardFormFalidator.disableSubmitButton();
+    //addCardFormFalidator.disableSubmitButton();//
+    addCardFormFalidator.cleanInputErrors();
 })
 
 
