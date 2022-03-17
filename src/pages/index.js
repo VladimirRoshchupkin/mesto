@@ -7,7 +7,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 
-//block\form
+//block\form.
 const popupProfile = document.querySelector('.popup_js_profile');
 //btn
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
