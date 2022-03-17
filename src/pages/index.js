@@ -1,7 +1,7 @@
 import './index.css'
 import {FormValidator} from '../components/FormValidator.js'
 import { Card } from '../components/Card.js';
-import {initialCards, validationConstants} from '../components/initialData.js'
+import {initialCards, validationConstants} from '../utils/constants.js'
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -55,13 +55,13 @@ const editUserPopup = new PopupWithForm('.popup_js_profile', {handlerSubmitForm:
 }   )
 editUserPopup.setEventListeners();
 
-function SetPopupUserInfo(Data) {
-    popupProfileInputName.value=Data.name;
-    popupProfileAbout.value=Data.about;
+function setPopupUserInfo(data) {
+    popupProfileInputName.value=data.name;
+    popupProfileAbout.value=data.about;
 }
 
 profileBtnEdit.addEventListener('click', ()=> {
-    SetPopupUserInfo(userProfile.getUserInfo());
+    setPopupUserInfo(userProfile.getUserInfo());
     editFormFalidator.checkFormValidity();
     editUserPopup.open();
 })
