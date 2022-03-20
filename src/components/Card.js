@@ -19,6 +19,12 @@ export class Card {
         this._elementHeart.addEventListener('click',() => this._elementHeart.classList.toggle('element__btn-heart_active'));
     }
 
+    _setLikes() {
+        console.log('likesmass', this._item.likes, this._item.likes.length)
+        const likeCountElement = this._element.querySelector('.element__like-count');
+        likeCountElement.textContent = this._item.likes.length;
+    }
+
     _setEventListenerDelete() {
         this._elementDelete.addEventListener('click',() => this._element.remove());
     }
@@ -38,6 +44,7 @@ export class Card {
         this._elementImg.src = this._item.link;
         this._elementImg.alt = 'фотография ' + this._item.name;
         this._elementTitle.textContent=this._item.name;
+        this._setLikes();
         this._setEventListeners();
         return this._element;
     }

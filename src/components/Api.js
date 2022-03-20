@@ -64,6 +64,38 @@ export class Api {
             console.log()
         })
     }
+
+    addCard(item) {
+        console.log('Api.addCard')
+        console.log(item.name, item.about)
+        return fetch(`${this._baseUrl}/cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: item.name,//'Marie Skłodowska Curie',
+                link: item.link//'Physicist and Chemist'
+              })
+        }).then((res)=> {
+            if (res.ok) {
+                return res.json()  
+            }
+            else {
+                Promise.reject(res.status)
+            }
+        }
+        )
+        .catch(()=> {
+            console.log()
+        })
+    }
+
+
+
+
+
+
+
+
   
     // другие методы работы с API
   }

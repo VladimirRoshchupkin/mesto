@@ -27,7 +27,7 @@ const api = new Api({
   api.getInitialCards().then((ServerCardList)=> {
     console.log('ответ cards',ServerCardList);
     ServerCardList.forEach(cardData => {
-        cardSection.addItem(createCard({name: cardData.name , link: cardData.link }))        
+        cardSection.addItem(createCard({name: cardData.name , link: cardData.link, likes: cardData.likes }))        
     });
     //userProfile.setUserInfo({name: res.name, about: res.about})
 })
@@ -62,21 +62,27 @@ function createCard (item) {
     return element
 }
 
-const cardSection = new Section ({items: initialCards, renderer: (item)=> {
+/* const cardSection = new Section ({items: initialCards, renderer: (item)=> {
     cardSection.addItem(createCard(item));
 }
 },'.elements')
-cardSection.renderItems()
+cardSection.renderItems() */
+const cardSection = new Section ({items: [], renderer: (item)=> {
+    cardSection.addItem(createCard(item));
+}
+},'.elements')
+
 
 const addCardPopup = new PopupWithForm('.popup_js_element', {handlerSubmitForm: (item)=> {
-    cardSection.addItem(createCard({name: item['popup_name'], link: item['popup_link']}));
+    api.addCard({name: item.popup_name, link: item.popup_link}).then((res)=>{cardSection.addItem(createCard({name: res.name, link: res.link, likes: res.likes}));})
+    //cardSection.addItem(createCard({name: item['popup_name'], link: item['popup_link']}));
 }})
 addCardPopup.setEventListeners()
 
 const userProfile = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__user-description'});
 const editUserPopup = new PopupWithForm('.popup_js_profile', {handlerSubmitForm: (item) => {
     console.log(item)
-    api.editProfile({name: item.popup_name, about: item.popup_about})
+    api.editProfile({name: item.popup_name, about: item.popup_about}).then((res)=>{userProfile.setUserInfo({name: res.name, about: res.about})})    //then(refreshProfile())-это надёжнее, но доп запрос на сервер
     //userProfile.setUserInfo({name: item['popup_name'], about: item['popup_about']})
 }
 }   )
