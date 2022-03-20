@@ -5,7 +5,32 @@ import {initialCards, validationConstants} from '../utils/constants.js'
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
-import { UserInfo } from '../components/UserInfo.js';
+import { UserInfo } from '../components/UserInfo.js'; 
+import { Api } from '../components/Api.js'; 
+
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
+    headers: {
+      authorization: '2ac160e3-289e-41a6-a18f-46d80731db29',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  function refreshProfile() {
+    api.getProfile().then((res)=> {
+        console.log('ответ профиль',res);
+        userProfile.setUserInfo({name: res.name, about: res.about})
+    })
+  }
+  refreshProfile()
+
+  api.getInitialCards().then((ServerCardList)=> {
+    console.log('ответ cards',ServerCardList);
+    ServerCardList.forEach(cardData => {
+        cardSection.addItem(createCard({name: cardData.name , link: cardData.link }))        
+    });
+    //userProfile.setUserInfo({name: res.name, about: res.about})
+})
 
 //block\form.
 const popupProfile = document.querySelector('.popup_js_profile');
@@ -50,7 +75,9 @@ addCardPopup.setEventListeners()
 
 const userProfile = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__user-description'});
 const editUserPopup = new PopupWithForm('.popup_js_profile', {handlerSubmitForm: (item) => {
-    userProfile.setUserInfo({name: item['popup_name'], about: item['popup_about']})
+    console.log(item)
+    api.editProfile({name: item.popup_name, about: item.popup_about})
+    //userProfile.setUserInfo({name: item['popup_name'], about: item['popup_about']})
 }
 }   )
 editUserPopup.setEventListeners();
