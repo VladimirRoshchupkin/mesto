@@ -12,4 +12,9 @@ export class UserInfo {
         this._name.textContent=Info.name;
         this._about.textContent=Info.about;
     }
+
+    setUserId(id) {
+        console.log('userInfoId', id)
+        this.id=id;
+    }
 }

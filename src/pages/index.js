@@ -20,17 +20,20 @@ const api = new Api({
     api.getProfile().then((res)=> {
         console.log('ответ профиль',res);
         userProfile.setUserInfo({name: res.name, about: res.about})
+        userProfile.setUserId(res._id)
     })
   }
   refreshProfile()
 
-  api.getInitialCards().then((ServerCardList)=> {
-    console.log('ответ cards',ServerCardList);
-    ServerCardList.forEach(cardData => {
-        cardSection.addItem(createCard({name: cardData.name , link: cardData.link, likes: cardData.likes }))        
-    });
-    //userProfile.setUserInfo({name: res.name, about: res.about})
-})
+  function refreshCards() {
+    api.getInitialCards().then((ServerCardList)=> {
+        console.log('ответ cards',ServerCardList);
+        ServerCardList.forEach(cardData => {
+            cardSection.addItem(createCard({name: cardData.name , link: cardData.link, likes: cardData.likes, id: cardData._id, idUser: userProfile.id, idCardOwner: cardData.owner._id}))        
+        });
+    })
+  }
+  refreshCards();
 
 //block\form.
 const popupProfile = document.querySelector('.popup_js_profile');
@@ -57,7 +60,14 @@ const popupWithImages = new PopupWithImage('.popup_js_photo')
 popupWithImages.setEventListeners();
 
 function createCard (item) {
-    const newCard = new Card(item, '.template_element',() => {popupWithImages.open(item)}); //хмммм интересный момент, если не взять в {}, то сразу идут открытия окна, при этом функция открытия не работает на слушателе.
+    console.log('createCard', item.idUser, item.IdCardOwner)
+    const newCard = new Card(
+        item,
+        '.template_element',
+        () => {popupWithImages.open(item)},
+        (item) => {console.log('try open delete popup', item); confirmPopup.open(); confirmPopup.anyFunction(()=> {console.log('any function body'); api.deleteCard(item).then(refreshCards())})}, //тут всё таки рефрешу все карты, т.к. если удалить локально состояние локальное не будет соответствовать состоянию обновления с сервера.
+        () => {console.log('set like handler'); return api.toggleLike({isLiked: newCard._isLiked, id: item.id})}  //.then.newCard.toggleLike()
+        ); //хмммм интересный момент, если не взять в {}, то сразу идут открытия окна, при этом функция открытия не работает на слушателе.
     const element = newCard.createElement()
     return element
 }
@@ -74,7 +84,8 @@ const cardSection = new Section ({items: [], renderer: (item)=> {
 
 
 const addCardPopup = new PopupWithForm('.popup_js_element', {handlerSubmitForm: (item)=> {
-    api.addCard({name: item.popup_name, link: item.popup_link}).then((res)=>{cardSection.addItem(createCard({name: res.name, link: res.link, likes: res.likes}));})
+    api.addCard({name: item.popup_name, link: item.popup_link})
+    .then((res)=>{cardSection.addItem(createCard({name: res.name, link: res.link, likes: res.likes, id: res._id, idUser: userProfile.id, idCardOwner: res.owner._id}));})
     //cardSection.addItem(createCard({name: item['popup_name'], link: item['popup_link']}));
 }})
 addCardPopup.setEventListeners()
@@ -82,11 +93,14 @@ addCardPopup.setEventListeners()
 const userProfile = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__user-description'});
 const editUserPopup = new PopupWithForm('.popup_js_profile', {handlerSubmitForm: (item) => {
     console.log(item)
-    api.editProfile({name: item.popup_name, about: item.popup_about}).then((res)=>{userProfile.setUserInfo({name: res.name, about: res.about})})    //then(refreshProfile())-это надёжнее, но доп запрос на сервер
+    api.editProfile({name: item.popup_name, about: item.popup_about}).then((res)=>{userProfile.setUserInfo({name: res.name, about: res.about})})    //then(refreshProfile())-это надёжнее и даже правильнеев нашем случае, но доп запрос на сервер, но можем не увидеть свою карту, если на сервере будут добавлять по 30карточек за время обновления данных с сервера
     //userProfile.setUserInfo({name: item['popup_name'], about: item['popup_about']})
 }
 }   )
 editUserPopup.setEventListeners();
+
+const confirmPopup = new PopupWithForm('.popup_js_delete',{handlerSubmitForm: (item) => { console.log('delete popup', item); confirmPopup.anySavedFunction() }}); //api.deleteCard(item)
+confirmPopup.setEventListeners();
 
 function setPopupUserInfo(data) {
     popupProfileInputName.value=data.name;

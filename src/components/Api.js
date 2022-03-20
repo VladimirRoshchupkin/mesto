@@ -11,6 +11,7 @@ export class Api {
             headers: this._headers
         }).then((res)=> {
             if (res.ok) {
+                //this.id=res.json()._id;
                 return res.json()  
             }
             else {
@@ -18,6 +19,7 @@ export class Api {
             }
         }
         )
+        //.then((res)=> {this.id=res.id;} )
         .catch(()=> {
             console.log()
         })
@@ -72,8 +74,8 @@ export class Api {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: item.name,//'Marie Skłodowska Curie',
-                link: item.link//'Physicist and Chemist'
+                name: item.name,
+                link: item.link
               })
         }).then((res)=> {
             if (res.ok) {
@@ -89,7 +91,46 @@ export class Api {
         })
     }
 
+    deleteCard(item) {
+        console.log('Api.deleteCard')
+        console.log(item.id)
+        return fetch(`${this._baseUrl}/cards/${item.id}`, {
+            method: 'DELETE',
+            headers: this._headers
+        }).then((res)=> {
+            if (res.ok) {
+                return res.json()  
+            }
+            else {
+                Promise.reject(res.status)
+            }
+        }
+        )
+        .catch(()=> {
+            console.log()
+        })
+    }
 
+    toggleLike(item) {
+        const typeRequest = item.isLiked ? 'DELETE' : 'PUT'
+        console.log('Api.toggleLike', typeRequest)
+        console.log(item.id)
+        return fetch(`${this._baseUrl}/cards/${item.id}/likes`, {
+            method: typeRequest,
+            headers: this._headers
+        }).then((res)=> {
+            if (res.ok) {
+                return res.json()  
+            }
+            else {
+                Promise.reject(res.status)
+            }
+        }
+        )
+        .catch(()=> {
+            console.log()
+        })
+    }
 
 
 
