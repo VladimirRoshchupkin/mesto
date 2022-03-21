@@ -1,0 +1,26 @@
+.profile__avatar-cont {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.profile__avatar-cont::after {
+    content: " ";  
+    background:  url(../../../images/editProfile.svg) no-repeat center;
+    visibility: visible;
+    height: 26px;
+    width: 26px;
+    top: 47px;
+    left: 47px;
+/*     top: 50%;
+    left: 50%;
+    transform: translate (-50%, -50%); rgba(0, 0, 0, 0.8) */
+    z-index: 2;
+    visibility: hidden;
+    position: absolute; 
+}
+
+.profile__avatar-cont:hover::after {
+    visibility: visible;
+}

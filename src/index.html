@@ -13,8 +13,11 @@
     </header>
     <main class="content">
       <section class="profile">
-        <!-- <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография пользователя"> -->
-        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя">
+        <div class="profile__avatar-cont">
+          <!-- <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография пользователя"> -->
+          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя">
+          <!-- <figure class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя"></figure> -->
+        </div>
         <div class="profile__info">
           <h1 class="profile__user-name"></h1> <!-- Жак-Ив Кусто -->
           <button type="button" class="profile__btn-edit" aria-label="Редактировать"></button>
@@ -55,6 +58,18 @@
           <input id="link" name="popup_link" class="popup__input popup__input_js_link" type="url" placeholder="Ссылка на картинку" required>
           <span class="popup__error popup__error_js_link"></span>
           <button type="submit" class="popup__btn-save">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_js_avatar-update">
+      <div class="popup__container">
+        <button type="button" class="popup__btn-close" aria-label="Закрыть"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_type_avatar-update-js" name="popup_form" novalidate>
+          <input id="link-update" name="popup_link-update" class="popup__input popup__input_js_link-update" type="url" placeholder="Ссылка на картинку" required>
+          <span class="popup__error popup__error_js_link-update"></span>
+          <button type="submit" class="popup__btn-save popup__btn-update">Создать</button>
         </form>
       </div>
     </div>

@@ -132,7 +132,28 @@ export class Api {
         })
     }
 
-
+    editAvatar(item) {
+        console.log('Api.editAvatar')
+        console.log(item.avatar)
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: item.avatar
+              })
+        }).then((res)=> {
+            if (res.ok) {
+                return res.json()  
+            }
+            else {
+                Promise.reject(res.status)
+            }
+        }
+        )
+        .catch(()=> {
+            console.log()
+        })
+    }
 
 
 

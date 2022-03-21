@@ -10,6 +10,7 @@ export class FormValidator {
     }
 
     _setInputError(error_msg, input) {
+        console.log('_setInputError',error_msg, input)
         error_msg.classList.add(this._errorClass);
         error_msg.textContent=input.validationMessage;
         input.classList.add(this._inputErrorClass);
@@ -22,6 +23,7 @@ export class FormValidator {
     }
 
     _validateInput(input) { 
+        console.log('_validateInput', input, `.popup__error_js_${input.id}`)
         const valid = input.validity.valid;
         const error_msg = this._form.querySelector(`.popup__error_js_${input.id}`);
         if (valid) {
@@ -48,7 +50,7 @@ export class FormValidator {
     }
 
     _toggleButtonState () {
-        this._formValid ? this._enableSubmitButton () : this.disableSubmitButton ();
+        this._formValid ? this._enableSubmitButton() : this.disableSubmitButton();
     }
     
     _validateInputs(input) {

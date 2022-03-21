@@ -84,6 +84,11 @@ export class Card {
         this._elementDelete.addEventListener('click',() => this._handleDeleteClick(this._item));
     }
 
+    deleteCard() {
+        console.log('remove card')
+        this._element.remove()
+    }
+
     _setEventListeners() {
         this._setEventListenerImg()
         this._setEventListenerLike()

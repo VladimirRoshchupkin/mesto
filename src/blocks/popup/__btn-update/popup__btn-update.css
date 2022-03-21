@@ -1,5 +1,5 @@
-.popup__btn-delete {
-    margin: 0 36px 37px;/*up 18*/
+.popup__btn-update {
+    margin: 43px 36px 37px;/*up 18*/
     padding: 0;
     border: none;
     width: 358px;
@@ -16,14 +16,14 @@
     box-sizing: border-box;
 }
 
-.popup__btn-delete:hover {
+.popup__btn-update:hover {
     opacity: 0.8;
     cursor: pointer;
 }
 
-@media screen and (max-width: 640px) {/* экраны не заданы, оставляю прошлые настройки */
-    .popup__btn-delete {
-        margin: 25px 22px 25px;
+@media screen and (max-width: 640px) {/* экраны не заданы, оставляю прошлые настройки со сдвигом */
+    .popup__btn-update {
+        margin: 40px 22px 25px;
         width: 238px;
         height: 46px;
         font-size: 14px;
