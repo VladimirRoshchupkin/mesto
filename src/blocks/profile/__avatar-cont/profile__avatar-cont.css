@@ -6,16 +6,12 @@
 }
 
 .profile__avatar-cont::after {
-    content: " ";  
+    content: " ";
     background:  url(../../../images/editProfile.svg) no-repeat center;
-    visibility: visible;
     height: 26px;
     width: 26px;
     top: 47px;
     left: 47px;
-/*     top: 50%;
-    left: 50%;
-    transform: translate (-50%, -50%); rgba(0, 0, 0, 0.8) */
     z-index: 2;
     visibility: hidden;
     position: absolute; 
