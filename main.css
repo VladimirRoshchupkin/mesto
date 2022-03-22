@@ -460,6 +460,7 @@ template {
     display: flex;
     padding: 40px 0 51px;
     align-items: center;
+    position: relative;
 }
 
 @media screen and (max-width: 800px) {
@@ -473,6 +474,11 @@ template {
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    position: relative;
+}
+
+.profile__avatar:hover {
+    opacity: 0.2;
 }
 
 @media screen and (max-width: 800px) {
@@ -588,6 +594,32 @@ template {
 
     }
 }
+.profile__avatar-cont {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.profile__avatar-cont::after {
+    content: " ";  
+    background:  url(a086f758840ae814ecde.svg) no-repeat center;
+    visibility: visible;
+    height: 26px;
+    width: 26px;
+    top: 47px;
+    left: 47px;
+/*     top: 50%;
+    left: 50%;
+    transform: translate (-50%, -50%); rgba(0, 0, 0, 0.8) */
+    z-index: 2;
+    visibility: hidden;
+    position: absolute; 
+}
+
+.profile__avatar-cont:hover::after {
+    visibility: visible;
+}
 .elements {
     display: grid;
     column-gap: 17px;
@@ -610,7 +642,8 @@ template {
     margin: 0 auto;/*Иначе (если не добавить) 2 карточки некрасиво встают, хоть этот случай и не описан в задании, но привязка к левой стороне глаз не радует*/
 }
 .element__btn-heart {
-    margin: 30px 20px 30px 0px;
+    /* margin: 30px 20px 30px 0px; */
+    margin: 0 0 3px 0;
     padding: 0;
     min-width: 22px;
     height: 19px;
@@ -677,6 +710,15 @@ template {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.element__like-count {
+    color: #000;
+}
+.element__cont-like {
+    display: flex;
+    flex-direction: column;
+    padding: 23px 20px 0 20px;
+    align-items: center;
 }
 .footer {
     margin: 0 200px;
@@ -902,6 +944,70 @@ template {
 .popup__btn-save_disabled:hover {
     cursor: default;
 } 
+.popup__btn-delete {
+    margin: 0 36px 37px;/*up 18*/
+    padding: 0;
+    border: none;
+    width: 358px;
+    height: 50px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    transition: opacity 1s;
+    box-sizing: border-box;
+}
+
+.popup__btn-delete:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {/* экраны не заданы, оставляю прошлые настройки */
+    .popup__btn-delete {
+        margin: 25px 22px 25px;
+        width: 238px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+.popup__btn-update {
+    margin: 43px 36px 37px;/*up 18*/
+    padding: 0;
+    border: none;
+    width: 358px;
+    height: 50px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    transition: opacity 1s;
+    box-sizing: border-box;
+}
+
+.popup__btn-update:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {/* экраны не заданы, оставляю прошлые настройки со сдвигом */
+    .popup__btn-update {
+        margin: 40px 22px 25px;
+        width: 238px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
 
 
 
