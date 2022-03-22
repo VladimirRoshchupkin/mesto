@@ -15,7 +15,7 @@
       <section class="profile">
         <div class="profile__avatar-cont">
           <!-- <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография пользователя"> -->
-          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя">
+          <img class="profile__avatar" src="<%=require('./images/black.jpg')%>"  alt="Фотография пользователя"> <!-- src="<%=require('./images/avatar.jpg')%>" -->
           <!-- <figure class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография пользователя"></figure> -->
         </div>
         <div class="profile__info">
@@ -98,8 +98,10 @@
         <button type="button" class="element__btn-delete" aria-label="Удалить"></button>
         <div class="element__cont">
           <h2 class="element__title"></h2>
-          <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
-          <span type="button" class="element__like-count"></span>
+          <div class="element__cont-like">
+            <button type="button" class="element__btn-heart" aria-label="Сердечко"></button>
+            <span type="button" class="element__like-count"></span>
+          </div>
         </div>
       </article>
     </template>

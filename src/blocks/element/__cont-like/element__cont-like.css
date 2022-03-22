@@ -1,0 +1,6 @@
+.element__cont-like {
+    display: flex;
+    flex-direction: column;
+    padding: 23px 20px 0 20px;
+    align-items: center;
+}
