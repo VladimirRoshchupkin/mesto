@@ -6,7 +6,6 @@ export class Card {
         this._popupImgName = document.querySelector('.popup_js_photo').querySelector('.popup__figcap');//popupPhoto.querySelector('.popup__figcap');
         this._openPopupPhoto = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
-        console.log(item.idUser==item.idCardOwne,item.idUser,item.idCardOwner)
         this._isOwner = item.idUser===item.idCardOwner;
         this._handleLikeClick = handleLikeClick
     }
@@ -39,53 +38,29 @@ export class Card {
 
     _setLikeProperty() {
         this.checkLikers()
-        console.log('isLiked=',this._isLiked)
         this._isLiked ? this.activateLike() : this.deactivateLike();
         this._setLikes()
     }
 
     updateLikeStatus(res) {
-        console.log('changed likes', this._item.likes,res.likes)
         this._updateLikeMassive(res)
-        //this._item.likes=res.likes;
-/*         this._isLiked = this._item.likes.some(user => 
-            user._id===this._item.idUser     
-        ) */
-
         this._setLikeProperty()
-/*         this.checkLikers()
-        console.log('isLiked=',this._isLiked)
-        this._isLiked ? this.activateLike() : this.deactivateLike;
-        this._setLikes() */
     }
 
     _setEventListenerLike() {
-        //this._elementHeart.addEventListener('click',() => this._elementHeart.classList.toggle('element__btn-heart_active'));
-        this._elementHeart.addEventListener('click',() => this._handleLikeClick().then((res)=>{this.updateLikeStatus(res)
-/*             console.log('changed likes', this._item.likes,res.likes)
-            this._item.likes=res.likes;
-            this._isLiked = this._item.likes.some(user => 
-                user._id===this._item.idUser     
-            )
-            console.log('isLiked=',this._isLiked) */
-             
+        this._elementHeart.addEventListener('click',() => this._handleLikeClick().then((res)=>{this.updateLikeStatus(res) 
         }));
     }
 
     _setLikes() {
-        console.log('likesmass', this._item.likes, this._item.likes.length, this._isOwner)
-        //const likeCountElement = this._element.querySelector('.element__like-count');
-        //likeCountElement.textContent = this._item.likes.length;
         this._likeCountElement.textContent = this._item.likes.length;
     }
 
     _setEventListenerDelete() {
-        //this._elementDelete.addEventListener('click',() => this._element.remove());
         this._elementDelete.addEventListener('click',() => this._handleDeleteClick(this._item));
     }
 
     deleteCard() {
-        console.log('remove card')
         this._element.remove()
     }
 
@@ -111,7 +86,6 @@ export class Card {
         this._elementImg.alt = 'фотография ' + this._item.name;
         this._elementTitle.textContent=this._item.name;
         this._likeCountElement = this._element.querySelector('.element__like-count');
-        //this._setLikes();
         this._setLikeProperty()
         this._setEventListeners();
         this._hideDeleteButton();

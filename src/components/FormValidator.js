@@ -10,7 +10,6 @@ export class FormValidator {
     }
 
     _setInputError(error_msg, input) {
-        console.log('_setInputError',error_msg, input)
         error_msg.classList.add(this._errorClass);
         error_msg.textContent=input.validationMessage;
         input.classList.add(this._inputErrorClass);
@@ -23,7 +22,6 @@ export class FormValidator {
     }
 
     _validateInput(input) { 
-        console.log('_validateInput', input, `.popup__error_js_${input.id}`)
         const valid = input.validity.valid;
         const error_msg = this._form.querySelector(`.popup__error_js_${input.id}`);
         if (valid) {
@@ -73,7 +71,7 @@ export class FormValidator {
         });
     }
 
-    cleanInputErrors() {//как нехотелось создавать, т.к. добавлены 4 новые функции, одна переделана, но жаль было терять этот функционал, в ПР7 он работал, вроде проверял тогда хоть и немного с другой логикой.
+    cleanInputErrors() {
         this._inputs.forEach(input => {
             this._cleanInputError(input);
         });

@@ -16,13 +16,11 @@ export class UserInfo {
     }
 
     setUserAvatar(Info) {
-        console.log('qqweqee',Info)
         this._photo.src=Info.avatar;
         
     }
 
     setUserId(id) {
-        console.log('userInfoId', id)
         this.id=id;
     }
 }

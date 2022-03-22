@@ -2,16 +2,13 @@ export class Api {
     constructor({baseUrl, headers}) {
         this._headers=headers;
         this._baseUrl=baseUrl;
-      // тело конструктора
     }
 
     getProfile() {
-        console.log('Api.getProfile')
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         }).then((res)=> {
             if (res.ok) {
-                //this.id=res.json()._id;
                 return res.json()  
             }
             else {
@@ -19,14 +16,12 @@ export class Api {
             }
         }
         )
-        //.then((res)=> {this.id=res.id;} )
         .catch(()=> {
             console.log()
         })
     }
 
     getInitialCards() {
-        console.log('Api.getInitialCards')
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         }).then((res)=> {
@@ -44,14 +39,12 @@ export class Api {
     }
 
     editProfile(item) {
-        console.log('Api.editProfile')
-        console.log(item.name, item.about)
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: item.name,//'Marie Skłodowska Curie',
-                about: item.about//'Physicist and Chemist'
+                name: item.name,
+                about: item.about
               })
         }).then((res)=> {
             if (res.ok) {
@@ -68,8 +61,6 @@ export class Api {
     }
 
     addCard(item) {
-        console.log('Api.addCard')
-        console.log(item.name, item.about)
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
@@ -92,8 +83,6 @@ export class Api {
     }
 
     deleteCard(item) {
-        console.log('Api.deleteCard')
-        console.log(item.id)
         return fetch(`${this._baseUrl}/cards/${item.id}`, {
             method: 'DELETE',
             headers: this._headers
@@ -113,8 +102,6 @@ export class Api {
 
     toggleLike(item) {
         const typeRequest = item.isLiked ? 'DELETE' : 'PUT'
-        console.log('Api.toggleLike', typeRequest)
-        console.log(item.id)
         return fetch(`${this._baseUrl}/cards/${item.id}/likes`, {
             method: typeRequest,
             headers: this._headers
@@ -133,8 +120,6 @@ export class Api {
     }
 
     editAvatar(item) {
-        console.log('Api.editAvatar')
-        console.log(item.avatar)
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
@@ -155,11 +140,6 @@ export class Api {
         })
     }
 
-
-
-
-  
-    // другие методы работы с API
   }
   
   const api = new Api({
