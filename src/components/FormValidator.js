@@ -7,6 +7,7 @@ export class FormValidator {
         this._inactiveButtonClass = settings.inactiveButtonClass
         this._inputErrorClass = settings.inputErrorClass
         this._errorClass = settings.errorClass
+        this._submitBtn = this._form.querySelector(this._submitButtonSelector);
     }
 
     _setInputError(error_msg, input) {
@@ -81,7 +82,7 @@ export class FormValidator {
     _addEventListenersToForm () {
         this._inputs=this._getInputsFromForm()   
         this._inputs.forEach(input => {
-            this._submitBtn = this._form.querySelector(this._submitButtonSelector);
+            //this._submitBtn = this._form.querySelector(this._submitButtonSelector);
             input.addEventListener('input',() => {this._validateForm(input)});
         });
     }

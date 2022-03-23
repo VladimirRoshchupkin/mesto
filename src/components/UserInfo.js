@@ -10,9 +10,9 @@ export class UserInfo {
     }
 
 
-    setUserInfo(Info) {
-        this._name.textContent=Info.name;
-        this._about.textContent=Info.about;
+    setUserInfo(info) {
+        this._name.textContent=info.name;
+        this._about.textContent=info.about;
     }
 
     setUserAvatar(Info) {

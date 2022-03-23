@@ -40,8 +40,8 @@ const api = new Api({
   //7. Работать со слабой связью я умею, в остальных местах где она нужна везде сделана, в одном месте даже не через конструктор а через функцию, что на мой взгляд более универсально, т.к. конструктор мы обычно не меняем, а если меняем, то другой разработчик может не заметить этого и расчитывать на статический метод в рамках всего кода.
   //8. Не хочу юзать renderItems в ущерб коду, поэтому если без него прям совсем совсем никак, прошу обосновать почему я не могу напрямую использовать addItem если это не запрещено, а более того это разрешено раз метод публичный по заданию, в рамках добавления отдельной карточки все юзаем addItem напрямую, хотя там тоже можно отрисовать через renderItems обновив _items для новой карточки (в данной работе мы не обрабатываем позже стартовый массив карточек, т.е. перезатирать его не запрещено, и ссылок на запрет нет).
   function refreshCards() {
-    api.getInitialCards().then((ServerCardList)=> {
-        ServerCardList.reverse().forEach(cardData => {
+    return api.getInitialCards().then((serverCardList)=> {
+        serverCardList.reverse().forEach(cardData => {
             cardSection.addItem(createCard({
                 name: cardData.name, 
                 link: cardData.link, 
@@ -52,6 +52,7 @@ const api = new Api({
             }))        
         });
     })
+    .catch((error)=> {console.log(error)})
   }
 
   function refreshProfile() {
@@ -61,9 +62,11 @@ const api = new Api({
         userProfile.setUserId(res._id);
         userProfile.setUserAvatar({avatar: res.avatar});
     })
+    .catch((error)=> {console.log(error)})
   }
-  refreshProfile().then(()=> {refreshCards();})//карточки загружаются после получения id пользователя
-   //хотел рефрешить после вставки все карточки разом, но мы же не не переопределяем весь массив карт, и карточки не удалялись((, бегать по массиву текущих карт и удалять те которых нет в ответе списка от сервера - в задании нет и лень, может как-то это можно обновлять через функции, но пока не знаю как, а делать полный рефреш страницы это моргания.
+  //refreshProfile().then(()=> {refreshCards();})//карточки загружаются после получения id пользователя
+  Promise.all([refreshProfile(),refreshCards()])
+   
 
 const editFormValidator = new FormValidator (validationConstants, editForm)
 const addCardFormValidator = new FormValidator (validationConstants, addCardForm)
@@ -89,6 +92,7 @@ function createCard (item) {
                 api.deleteCard(item)
                 .then(() => {newCard.deleteCard()})
                 .then(()=>{confirmPopup.close()})
+                .catch((error)=> {console.log(error)})
                 .finally(()=> {
                     confirmPopup.displayWaitingText(false);
                 })
@@ -96,6 +100,7 @@ function createCard (item) {
         }, 
         () => { 
             return api.toggleLike({isLiked: newCard._isLiked, id: item.id})
+            .catch((error)=> {console.log(error)})
         }  
     ); 
     const element = newCard.createElement()
@@ -126,6 +131,7 @@ const addCardPopup = new PopupWithForm('.popup_js_element', {handlerSubmitForm: 
             idUser: userProfile.id, 
             idCardOwner: res.owner._id}));})
     .then(()=>{addCardPopup.close()})
+    .catch((error)=> {console.log(error)})
     .finally(()=> {addCardPopup.displayWaitingText(false);})
 }})
 addCardPopup.setEventListeners()
@@ -139,7 +145,8 @@ const editUserPopup = new PopupWithForm('.popup_js_profile', {handlerSubmitForm:
     editUserPopup.displayWaitingText(true);
     api.editProfile({name: item.popup_name, about: item.popup_about})
     .then((res)=>{userProfile.setUserInfo({name: res.name, about: res.about})})
-    .then(()=>{editUserPopup.close()})    
+    .then(()=>{editUserPopup.close()})
+    .catch((error)=> {console.log(error)})   
     .finally(()=> {editUserPopup.displayWaitingText(false);}) 
     }
 })
@@ -156,6 +163,7 @@ const editAvatarPopup = new PopupWithForm('.popup_js_avatar-update',{handlerSubm
     api.editAvatar({avatar: item['popup_link-update']})
     .then((res)=>{userProfile.setUserAvatar({avatar: res.avatar})})
     .then(()=>{editAvatarPopup.close()})
+    .catch((error)=> {console.log(error)})
     .finally(()=> {editAvatarPopup.displayWaitingText(false);})
 }}); 
 editAvatarPopup.setEventListeners();
